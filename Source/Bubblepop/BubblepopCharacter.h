@@ -72,6 +72,13 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = Bubble)
 	TSubclassOf<class APlayerBubble> BubbleClass;
+    
+    // Health
+    UPROPERTY(EditAnywhere)
+    float CharacterHealth;
+    
+    // Player Score
+    int CharacterScore;
 
 public:
 	/** Returns CameraBoom subobject **/

@@ -9,12 +9,26 @@ void ABubblepopHUD::DrawHUD()
     if (Canvas != NULL)
     {
         FString HUDString1 = FString(TEXT("Testing1!"));
-        FString HUDString2 = FString(TEXT("Testing2!"));
-        FString HUDString3 = FString(TEXT("Testing3!"));
+        FString PlayerOneScore = FString(TEXT("P1 Score: "));
+        FString Timer = FString(TEXT("Time:"));
+        FString PlayerTwoScore = FString(TEXT("P2 Score: "));
         Canvas->SetDrawColor(FColor::White);
-        Canvas->DrawText(HUDFont,HUDString1, 150.0f,10.0f, 2.0f, 2.0f);
+        //Canvas->DrawText(HUDFont,HUDString1, 150.0f,10.0f, 2.0f, 2.0f);
+        const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+        Canvas->SetDrawColor(FColor::Blue);
+        Canvas->DrawText(HUDFont, PlayerOneScore, 5.0f, 5.0f, 2.0f, 2.0f);
+        Canvas->SetDrawColor(FColor(255, 223, 0));
+        Canvas->DrawText(HUDFont, Timer, ViewportSize.X/2 - 32, 5.0f, 2.0f, 2.0f);
+        Canvas->SetDrawColor(FColor::Red);
+        Canvas->DrawText(HUDFont, PlayerTwoScore, ViewportSize.X/2 + 200, 5.0f, 2.0f, 2.0f);
+        //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X/2 - 150, 80.0f, 2.0f, 2.0f);
+        //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X/2 - 150, 100.0f, 2.0f, 2.0f);
+        //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X/2 - 150, 160.0f, 2.0f, 2.0f);
+
+
+
+
         
-        //const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
         //Canvas->DrawText(HUDFont,HUDString1, ViewportSize.X,10.0f, 2.0f, 2.0f);
         //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X, ViewportSize.Y / 2 + 10, 5.0f, 5.0f);
         
