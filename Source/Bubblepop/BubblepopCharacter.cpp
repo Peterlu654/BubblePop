@@ -26,7 +26,7 @@ ABubblepopCharacter::ABubblepopCharacter()
     // Configure character movement
     GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...
     GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f); // ...at this rotation rate
-    GetCharacterMovement()->JumpZVelocity = 600.f;
+    GetCharacterMovement()->JumpZVelocity = 650.f;
     GetCharacterMovement()->AirControl = 0.2f;
     
     // Create a camera boom (pulls in towards the player if there is a collision)
@@ -179,6 +179,10 @@ void ABubblepopCharacter::OnStopFire()
     }
 }
 
+void ABubblepopCharacter::setJump(float value){
+    GetCharacterMovement()->JumpZVelocity = value;
+}
+
 void ABubblepopCharacter::BeginPlay() {
     // Call base class BeginPlay
     Super::BeginPlay();
@@ -199,6 +203,7 @@ void ABubblepopCharacter::BeginPlay() {
         }
     }
     
+    
     // Spawn the weapon, if one was specified
     if (WeaponClass)
     {
@@ -211,7 +216,7 @@ void ABubblepopCharacter::BeginPlay() {
             // Need to set rotation like this because otherwise gun points down
             FRotator Rotation(0.0f, 0.0f, 0.0f);
             // Spawn the Weapon
-            MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(-20.0f, 10.0f, 100.0f),
+            MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(0.0f, 1.0f, 0.0f),
                                                   Rotation, SpawnParams);
             if (MyWeapon)
             {
@@ -225,4 +230,6 @@ void ABubblepopCharacter::BeginPlay() {
             }
         }
     }
+    
+     
 }

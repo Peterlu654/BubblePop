@@ -28,7 +28,7 @@ void ABubblepopGameMode::BeginPlay()
 {
     if (!PlayerLoaded)
     {
-        //UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
+        UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
         PlayerLoaded = true;
     }
     

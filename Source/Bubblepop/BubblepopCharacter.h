@@ -64,6 +64,9 @@ protected:
     
     UPROPERTY(EditAnywhere, Category = Weapon)
     TSubclassOf<class AWeapon> WeaponClass;
+    
+    void setJump(float value);
+    void BeginPlay() override;
 
 protected:
 	// APawn interface
@@ -82,7 +85,7 @@ public:
 
 private:
     class AWeapon* MyWeapon;
-	void BeginPlay() override;
+	
 	class APlayerBubble* MyBubble;
 };
 
