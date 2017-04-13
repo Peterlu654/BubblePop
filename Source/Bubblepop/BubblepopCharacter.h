@@ -39,6 +39,23 @@ public:
     int GetPlayerScore() { return CharacterScore; }
 
 	void PopBubble();
+    
+    void RespawnNoob();
+    
+    FVector SpawnPoints[11] =
+    {
+        FVector(-1550, 1150, 150),
+        FVector(-1750, -1400, 150),
+        FVector(-1150, -750, 550),
+        FVector(0, -1350, 350),
+        FVector(950, -950, 150),
+        FVector(950, 1350, 150),
+        FVector(-450, 1350, 350),
+        FVector(-450, 350, 550),
+        FVector(150, 350, 550),
+        FVector(950, 50, 550),
+        FVector(-1750, -250, 150)
+    };
 
 protected:
 

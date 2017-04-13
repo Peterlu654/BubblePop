@@ -233,7 +233,18 @@ void ABubblepopCharacter::PopBubble()
 	MyBubble = nullptr;
 	BubblePopped = true;
 	this->bCanBeDamaged = false;
+    
+    FTimerHandle spawnTimer;
+    GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::RespawnNoob, 3.0f, false);
 	
+}
+
+void ABubblepopCharacter::RespawnNoob()
+{
+    int index = FMath::RandRange(0, 10);
+    FVector pos = SpawnPoints[index];
+    
+    (UGameplayStatics::GetPlayerCharacter(GetWorld(), 1))->SetActorLocation(pos);
 }
 
 float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser){
