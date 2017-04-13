@@ -22,6 +22,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
+private:
+	UFUNCTION()
+	void OnHitBubble(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
 	
 };

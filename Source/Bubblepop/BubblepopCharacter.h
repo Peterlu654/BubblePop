@@ -38,6 +38,8 @@ public:
     // Getter for this character's score
     int GetPlayerScore() { return CharacterScore; }
 
+	void PopBubble();
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -72,9 +74,7 @@ protected:
     
     void setJump(float value);
     void BeginPlay() override;
-    
-    
-
+	
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -86,6 +86,9 @@ protected:
     // Health
     UPROPERTY(EditAnywhere)
     float CharacterHealth = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+	float CollisionRange = 2.0f;
     
     // Player Score
     int CharacterScore = 0;
@@ -98,8 +101,12 @@ public:
 
 
 private:
+	int PlayerId;
+
     class AWeapon* MyWeapon;
 	
 	class APlayerBubble* MyBubble;
+	bool InBubble;
+	bool BubblePopped;
 };
 
