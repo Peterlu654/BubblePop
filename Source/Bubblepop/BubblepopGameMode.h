@@ -11,8 +11,13 @@ class ABubblepopGameMode : public AGameModeBase
 public:
 	ABubblepopGameMode();
     
+    float GetRemainingTime() const { return RemainingTime; }
+    
+    void Tick(float DeltaSeconds) override;
+    
 private:
     void BeginPlay() override;
+    float RemainingTime;
 };
 
 

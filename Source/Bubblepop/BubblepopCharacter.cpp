@@ -46,7 +46,6 @@ ABubblepopCharacter::ABubblepopCharacter()
     MyWeapon = nullptr;
     MyBubble = nullptr;
     
-    CharacterScore = 0;
 }
 
 //////////////////////////////////////////////////////////////////////////
