@@ -38,6 +38,25 @@ public:
     // Getter for this character's score
     int GetPlayerScore() { return CharacterScore; }
 
+	void PopBubble();
+    
+    void RespawnNoob();
+    
+    FVector SpawnPoints[11] =
+    {
+        FVector(-1550, 1150, 150),
+        FVector(-1750, -1400, 150),
+        FVector(-1150, -750, 550),
+        FVector(0, -1350, 350),
+        FVector(950, -950, 150),
+        FVector(950, 1350, 150),
+        FVector(-450, 1350, 350),
+        FVector(-450, 350, 550),
+        FVector(150, 350, 550),
+        FVector(950, 50, 550),
+        FVector(-1750, -250, 150)
+    };
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -72,9 +91,7 @@ protected:
     
     void setJump(float value);
     void BeginPlay() override;
-    
-    
-
+	
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -86,6 +103,9 @@ protected:
     // Health
     UPROPERTY(EditAnywhere)
     float CharacterHealth = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+	float CollisionRange = 2.0f;
     
     // Player Score
     int CharacterScore = 0;
@@ -98,8 +118,12 @@ public:
 
 
 private:
+	int PlayerId;
+
     class AWeapon* MyWeapon;
 	
 	class APlayerBubble* MyBubble;
+	bool InBubble;
+	bool BubblePopped;
 };
 
