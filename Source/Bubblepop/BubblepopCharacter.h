@@ -33,6 +33,7 @@ public:
     // Stop firing weapon if have one
     void OnStopFire();
 
+    float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -67,6 +68,7 @@ protected:
     
     void setJump(float value);
     void BeginPlay() override;
+    
 
 protected:
 	// APawn interface
@@ -78,7 +80,7 @@ protected:
     
     // Health
     UPROPERTY(EditAnywhere)
-    float CharacterHealth;
+    float CharacterHealth = 100.0f;
     
     // Player Score
     int CharacterScore;

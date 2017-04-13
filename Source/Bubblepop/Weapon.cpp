@@ -2,6 +2,7 @@
 
 #include "Bubblepop.h"
 #include "Weapon.h"
+#include "Character1.h"
 
 
 // Sets default values
@@ -92,6 +93,14 @@ void AWeapon::WeaponTrace()
          {
          Dwarf->TakeDamage(WeaponDamage, FDamageEvent(), GetInstigatorController(), this);
          }*/
+        
+        ACharacter1* target = Cast<ACharacter1>(Hit.GetActor());
+        if (target){
+            target->TakeDamage(WeaponDamage, FDamageEvent(), GetInstigatorController(), this);
+        }
+        
+        
+        
     }
 }
 

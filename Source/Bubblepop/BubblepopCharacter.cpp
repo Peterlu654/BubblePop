@@ -201,6 +201,8 @@ void ABubblepopCharacter::BeginPlay() {
             MyBubble = World->SpawnActor<APlayerBubble>(BubbleClass, FVector::ZeroVector, Rotation, SpawnParams);
             if (MyBubble != nullptr) {
                 MyBubble->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
+                MyBubble->SetActorHiddenInGame(true);
+                
             }
         }
     }
@@ -233,5 +235,16 @@ void ABubblepopCharacter::BeginPlay() {
         }
     }
     
-     
+}
+
+float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser){
+    float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+    if (ActualDamage > 0.0f){
+        CharacterHealth -= 10;
+        if (CharacterHealth <= 10){
+            MyBubble->SetActorHiddenInGame(false);
+        }
+    }
+    
+    return ActualDamage;
 }

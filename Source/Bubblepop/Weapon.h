@@ -32,7 +32,7 @@ protected:
     
     // Damage for this weapon
     UPROPERTY(EditAnywhere, Category = Damage)
-    float WeaponDamage;
+    float WeaponDamage = 10.0f;
     
     // Hit effect of this weapon
     UPROPERTY(EditDefaultsOnly)
