@@ -3,6 +3,8 @@
 #include "Bubblepop.h"
 #include "SpawnManager.h"
 #include "Engine/TargetPoint.h"
+#include "time.h"
+#include <stdlib.h>
 
 
 // Sets default values
@@ -17,7 +19,8 @@ ASpawnManager::ASpawnManager()
 void ASpawnManager::BeginPlay()
 {
 	Super::BeginPlay();
-    OnSpawnTimer();
+    FTimerHandle spawnTimer;
+    GetWorldTimerManager().SetTimer(spawnTimer, this, &ASpawnManager::OnSpawnTimer, 1.0f, true);
 }
 
 // Called every frame
@@ -34,8 +37,16 @@ void ASpawnManager::OnSpawnTimer()
     int index = FMath::RandRange(0, numSpawn - 1);
     ATargetPoint* point = SpawnPoints[index];
     FVector pos = point->GetActorLocation();
+
+    
+    (UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->SetActorLocation(pos);
+    /*
+    int numSpawn = SpawnPoints.Num();
+    int index = FMath::RandRange(0, numSpawn - 1);
+    ATargetPoint* point = SpawnPoints[index];
+    FVector pos = point->GetActorLocation();
     FRotator rot = point->GetActorRotation();
     ACharacter* Char = GetWorld()->SpawnActor<ACharacter>(CharacterClass, pos, rot);
-    
+    */
     //UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
 }

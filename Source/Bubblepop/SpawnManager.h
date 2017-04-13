@@ -23,11 +23,6 @@ protected:
     UPROPERTY(EditAnywhere)
     TArray<class ATargetPoint*> SpawnPoints;
     
-    UPROPERTY(EditAnywhere)
-    float SpawnTime;
-    
-    UPROPERTY(EditAnywhere)
-    TSubclassOf<ACharacter> CharacterClass;
 
 public:
 	// Called every frame
