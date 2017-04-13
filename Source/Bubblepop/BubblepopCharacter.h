@@ -34,6 +34,10 @@ public:
     void OnStopFire();
 
     float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+    
+    // Getter for this character's score
+    int GetPlayerScore() { return CharacterScore; }
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -69,6 +73,7 @@ protected:
     void setJump(float value);
     void BeginPlay() override;
     
+    
 
 protected:
 	// APawn interface
@@ -83,7 +88,7 @@ protected:
     float CharacterHealth = 100.0f;
     
     // Player Score
-    int CharacterScore;
+    int CharacterScore = 0;
 
 public:
 	/** Returns CameraBoom subobject **/

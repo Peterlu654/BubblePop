@@ -32,6 +32,14 @@ void ABubblepopGameMode::BeginPlay()
         PlayerLoaded = true;
     }
     
-    ABubblepopHUD *HUD = Cast<ABubblepopHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
-    HUD->DrawMyText();
+    RemainingTime = 60;
+}
+
+void ABubblepopGameMode::Tick(float DeltaSeconds)
+{
+    RemainingTime -= DeltaSeconds;
+    if (RemainingTime <= 0.0f)
+    {
+        //end game
+    }
 }
