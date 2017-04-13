@@ -10,17 +10,25 @@
 
 void ABubblepopHUD::DrawHUD()
 {
-    if (Canvas != NULL)
+    if (Canvas != NULL && ABubblepopGameMode::HasGameStarted())
     {
         auto PlayerOneCharacter = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
         auto PlayerTwoCharacter = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),1));
         FString HUDString1 = FString(TEXT("Testing1!"));
-        std::string PlayerOneText("P1 Score: " + std::to_string(PlayerOneCharacter->GetPlayerScore()));
-        std::string PlayerTwoText("P2 Score: " + std::to_string(PlayerTwoCharacter->GetPlayerScore()));
+        //std::string PlayerOneText("P1 Score: " + std::to_string(PlayerOneCharacter->GetPlayerScore()));
+        //std::string PlayerTwoText("P2 Score: " + std::to_string(PlayerTwoCharacter->GetPlayerScore()));
+        std::string PlayerOneText("P1 Score: " );
+        std::string PlayerTwoText("P2 Score: " );
+
         float RemainingTime = Cast<ABubblepopGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->GetRemainingTime();
         int minutes = RemainingTime / 60;
         int seconds = ((int)RemainingTime) % 60;
-        std::string RemainingTimeText = std::to_string(minutes) + ":" + std::to_string(seconds);
+        std::string extraZero("");
+        if (seconds < 10)
+        {
+            extraZero = "0";
+        }
+        std::string RemainingTimeText = std::to_string(minutes) + ":" + extraZero + std::to_string(seconds);
         
         FString PlayerOneScore = FString(PlayerOneText.c_str());
         FString Timer = FString(RemainingTimeText.c_str());
