@@ -189,24 +189,24 @@ void ABubblepopCharacter::BeginPlay() {
     // Call base class BeginPlay
     Super::BeginPlay();
     
-    if (BubbleClass) {
-        UWorld* World = GetWorld();
-        if (World != nullptr) {
-            FActorSpawnParameters SpawnParams;
-            SpawnParams.Owner = this;
-            SpawnParams.Instigator = Instigator;
-            // Need to set rotation like this because otherwise gun points down
-            FRotator Rotation(0.0f, 0.0f, 0.0f);
-            
-            MyBubble = World->SpawnActor<APlayerBubble>(BubbleClass, FVector::ZeroVector, Rotation, SpawnParams);
-            if (MyBubble != nullptr) {
-                MyBubble->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
-                MyBubble->SetActorHiddenInGame(true);
-                
-            }
-        }
-    }
-    
+//    if (BubbleClass) {
+//        UWorld* World = GetWorld();
+//        if (World != nullptr) {
+//            FActorSpawnParameters SpawnParams;
+//            SpawnParams.Owner = this;
+//            SpawnParams.Instigator = Instigator;
+//            // Need to set rotation like this because otherwise gun points down
+//            FRotator Rotation(0.0f, 0.0f, 0.0f);
+//            
+//            MyBubble = World->SpawnActor<APlayerBubble>(BubbleClass, FVector::ZeroVector, Rotation, SpawnParams);
+//            if (MyBubble != nullptr) {
+//                MyBubble->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
+//                MyBubble->SetActorHiddenInGame(true);
+//                
+//            }
+//        }
+//    }
+//    
     
     // Spawn the weapon, if one was specified
     if (WeaponClass)
@@ -242,7 +242,23 @@ float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEv
     if (ActualDamage > 0.0f){
         CharacterHealth -= 10;
         if (CharacterHealth <= 10){
-            MyBubble->SetActorHiddenInGame(false);
+            
+            if (BubbleClass && MyBubble == nullptr) {
+                UWorld* World = GetWorld();
+                if (World != nullptr) {
+                    FActorSpawnParameters SpawnParams;
+                    SpawnParams.Owner = this;
+                    SpawnParams.Instigator = Instigator;
+                    // Need to set rotation like this because otherwise gun points down
+                    FRotator Rotation(0.0f, 0.0f, 0.0f);
+                    
+                    MyBubble = World->SpawnActor<APlayerBubble>(BubbleClass, FVector::ZeroVector, Rotation, SpawnParams);
+                    if (MyBubble != nullptr) {
+                        MyBubble->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
+                                                
+                    }
+                }
+            }
         }
     }
     
