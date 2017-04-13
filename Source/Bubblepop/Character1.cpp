@@ -7,6 +7,10 @@
 
 void ACharacter1::BeginPlay() {
     Super::BeginPlay();
+    
+    if (CharacterMesh){
+        PlayerMesh->SetSkeletalMesh(CharacterMesh);
+    }
     /*
     // Spawn the weapon, if one was specified
     if (WeaponClass)

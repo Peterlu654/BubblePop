@@ -48,6 +48,7 @@ ABubblepopCharacter::ABubblepopCharacter()
 	InBubble = false;
 	BubblePopped = false;
 	
+    PlayerMesh = GetMesh();
     
 }
 
@@ -232,7 +233,12 @@ void ABubblepopCharacter::PopBubble()
 	MyBubble->Destroy();
 	MyBubble = nullptr;
 	BubblePopped = true;
-	this->bCanBeDamaged = false;
+    
+    if (TombstoneMesh){
+        PlayerMesh->SetSkeletalMesh(TombstoneMesh);
+    }
+    
+    
     
     FTimerHandle spawnTimer;
     GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::RespawnNoob, 3.0f, false);
@@ -244,7 +250,15 @@ void ABubblepopCharacter::RespawnNoob()
     int index = FMath::RandRange(0, 10);
     FVector pos = SpawnPoints[index];
     
-    (UGameplayStatics::GetPlayerCharacter(GetWorld(), 1))->SetActorLocation(pos);
+    if (CharacterMesh){
+        PlayerMesh->SetSkeletalMesh(CharacterMesh);
+    }
+    
+    SetActorLocation(pos);
+    //(UGameplayStatics::GetPlayerCharacter(GetWorld(), 1))->SetActorLocation(pos);
+    BubblePopped = false;
+    InBubble = false;
+    CharacterHealth = 100;
 }
 
 float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser){

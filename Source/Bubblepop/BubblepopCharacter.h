@@ -16,6 +16,8 @@ class ABubblepopCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+    
+   
 public:
 	ABubblepopCharacter();
 
@@ -56,6 +58,15 @@ public:
         FVector(950, 50, 550),
         FVector(-1750, -250, 150)
     };
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Assets")
+    USkeletalMesh* CharacterMesh;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Assets")
+    USkeletalMesh* TombstoneMesh;
+    
+    UPROPERTY(VisibleAnywhere, Category = SkeletalMesh)
+    class USkeletalMeshComponent* PlayerMesh;
 
 protected:
 
