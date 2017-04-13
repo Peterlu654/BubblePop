@@ -6,6 +6,7 @@
 #include "BubblepopHUD.h"
 
 static bool PlayerLoaded = false;
+static bool GameStarted = false;
 
 
 ABubblepopGameMode::ABubblepopGameMode()
@@ -22,24 +23,43 @@ ABubblepopGameMode::ABubblepopGameMode()
     {
         HUDClass = BubblepopHUDBPClass.Class;
     }
+    
+    PrimaryActorTick.bCanEverTick = true;
+
 }
 
 void ABubblepopGameMode::BeginPlay()
 {
-    if (!PlayerLoaded)
+    Super::BeginPlay();
+    if (PlayerLoaded)
+    {
+        RemainingTime = 60;
+        GameStarted = true;
+    }
+    else
     {
         UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
         PlayerLoaded = true;
     }
+
     
-    RemainingTime = 60;
 }
 
-void ABubblepopGameMode::Tick(float DeltaSeconds)
+void ABubblepopGameMode::Tick(float DeltaTime)
 {
-    RemainingTime -= DeltaSeconds;
-    if (RemainingTime <= 0.0f)
+    Super::Tick(DeltaTime);
+    RemainingTime -= DeltaTime;
+    if (RemainingTime <= 0.0f && GameStarted)
     {
         //end game
+        PlayerLoaded = false;
+        GameStarted = false;
+        FGenericPlatformMisc::RequestExit(false);
+
     }
+}
+
+bool ABubblepopGameMode::HasGameStarted()
+{
+    return GameStarted;
 }

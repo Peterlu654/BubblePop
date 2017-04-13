@@ -13,7 +13,9 @@ public:
     
     float GetRemainingTime() const { return RemainingTime; }
     
-    void Tick(float DeltaSeconds) override;
+    void Tick(float DeltaTime) override;
+    
+    static bool HasGameStarted();
     
 private:
     void BeginPlay() override;
