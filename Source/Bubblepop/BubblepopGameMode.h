@@ -19,6 +19,8 @@ public:
     
 private:
     void BeginPlay() override;
+    void BeginDestroy() override;
+    //void OnDestroy() override;
     float RemainingTime;
 };
 

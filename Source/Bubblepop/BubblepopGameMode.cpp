@@ -23,8 +23,9 @@ ABubblepopGameMode::ABubblepopGameMode()
     {
         HUDClass = BubblepopHUDBPClass.Class;
     }
-    
     PrimaryActorTick.bCanEverTick = true;
+
+    
 
 }
 
@@ -33,13 +34,14 @@ void ABubblepopGameMode::BeginPlay()
     Super::BeginPlay();
     if (PlayerLoaded)
     {
-        RemainingTime = 60;
+        RemainingTime = 10;
         GameStarted = true;
     }
     else
     {
         UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
         PlayerLoaded = true;
+
     }
 
     
@@ -48,13 +50,22 @@ void ABubblepopGameMode::BeginPlay()
 void ABubblepopGameMode::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    if (!GameStarted)
+    {
+        return;
+    }
     RemainingTime -= DeltaTime;
-    if (RemainingTime <= 0.0f && GameStarted)
+    if (RemainingTime <= 0.0f)
     {
         //end game
         PlayerLoaded = false;
         GameStarted = false;
-        FGenericPlatformMisc::RequestExit(false);
+//        FGenericPlatformMisc::RequestExit(false);
+        //auto PlayerOneCharacter = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
+        //PlayerOneCharacter->GetController()->ConsoleCommand("quit");
+        //GetWorld()->Exec(GetWorld(), TEXT("exit"));
+        UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit);
+
 
     }
 }
@@ -63,3 +74,29 @@ bool ABubblepopGameMode::HasGameStarted()
 {
     return GameStarted;
 }
+
+/*void ABubblepopGameMode::BeginDestroy()
+{
+    PlayerLoaded = false;
+    GameStarted = false;
+    PrimaryActorTick.bCanEverTick = false;
+}*/
+
+void ABubblepopGameMode::BeginDestroy()
+{
+    Super::BeginDestroy();
+    //if (PlayerLoaded == true && GameStarted == true)
+    /*{
+        PlayerLoaded = false;
+
+    }
+    GameStarted = false;*/
+    
+}
+
+
+
+
+
+
+
