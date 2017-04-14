@@ -223,6 +223,11 @@ void ABubblepopCharacter::BeginPlay() {
     }
 }
 
+void ABubblepopCharacter::AddScoreAfterPopping()
+{
+	CharacterScore += PopScore;
+}
+
 
 void ABubblepopCharacter::PopBubble()
 {
@@ -239,9 +244,7 @@ void ABubblepopCharacter::PopBubble()
         SetActorScale3D(FVector(0.1, 0.1, 0.1));
         DisableInput( Cast<APlayerController>( GetController() ) );
     }
-    
-    
-    
+  
     FTimerHandle spawnTimer;
     GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::RespawnNoob, 5.0f, false);
 	
