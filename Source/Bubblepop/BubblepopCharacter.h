@@ -141,5 +141,8 @@ private:
 	bool InBubble;
 	bool BubblePopped;
 	const int PopScore = 10;
+
+	void ClearBubbleAfterTimeOut();
+	float BubbleTimeout = 5.0f;
 };
 
