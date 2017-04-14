@@ -243,7 +243,7 @@ void ABubblepopCharacter::PopBubble()
     
     
     FTimerHandle spawnTimer;
-    GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::RespawnNoob, 3.0f, false);
+    GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::RespawnNoob, 5.0f, false);
 	
 }
 

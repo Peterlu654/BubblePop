@@ -88,12 +88,6 @@ void AWeapon::WeaponTrace()
         // TODO: Actually do something
         UGameplayStatics::SpawnEmitterAtLocation(this, HitParticle, Hit.ImpactPoint);
         
-        /*ADwarfCharacter* Dwarf = Cast<ADwarfCharacter>(Hit.GetActor());
-         if (Dwarf)
-         {
-         Dwarf->TakeDamage(WeaponDamage, FDamageEvent(), GetInstigatorController(), this);
-         }*/
-        
         ACharacter1* target = Cast<ACharacter1>(Hit.GetActor());
         if (target){
             target->TakeDamage(WeaponDamage, FDamageEvent(), GetInstigatorController(), this);

@@ -8,6 +8,8 @@
 static bool PlayerLoaded = false;
 static bool GameStarted = false;
 
+static int ModeNum = 0;
+
 
 ABubblepopGameMode::ABubblepopGameMode()
 {
@@ -24,6 +26,8 @@ ABubblepopGameMode::ABubblepopGameMode()
         HUDClass = BubblepopHUDBPClass.Class;
     }
     PrimaryActorTick.bCanEverTick = true;
+    MyModeNum = ModeNum;
+    ModeNum++;
 
     
 
@@ -32,7 +36,22 @@ ABubblepopGameMode::ABubblepopGameMode()
 void ABubblepopGameMode::BeginPlay()
 {
     Super::BeginPlay();
-    if (PlayerLoaded)
+    
+    if (MyModeNum == 0)
+    {
+        return;
+    }
+    else
+    {
+        ModeNum = 1;
+        UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
+        GameStarted = true;
+        RemainingTime = 60.0f;
+        
+    }
+    
+    
+    /*if (PlayerLoaded)
     {
         RemainingTime = 10;
         GameStarted = true;
@@ -42,7 +61,7 @@ void ABubblepopGameMode::BeginPlay()
         UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
         PlayerLoaded = true;
 
-    }
+    }*/
 
     
 }
@@ -85,6 +104,12 @@ bool ABubblepopGameMode::HasGameStarted()
 void ABubblepopGameMode::BeginDestroy()
 {
     Super::BeginDestroy();
+    
+    if (MyModeNum == 0)
+    {
+        return;
+    }
+    GameStarted = false;
     //if (PlayerLoaded == true && GameStarted == true)
     /*{
         PlayerLoaded = false;

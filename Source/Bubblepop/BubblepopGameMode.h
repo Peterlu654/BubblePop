@@ -22,6 +22,7 @@ private:
     void BeginDestroy() override;
     //void OnDestroy() override;
     float RemainingTime;
+    int MyModeNum;
 };
 
 
