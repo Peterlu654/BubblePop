@@ -15,10 +15,10 @@ void ABubblepopHUD::DrawHUD()
         auto PlayerOneCharacter = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
         auto PlayerTwoCharacter = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),1));
         FString HUDString1 = FString(TEXT("Testing1!"));
-        //std::string PlayerOneText("P1 Score: " + std::to_string(PlayerOneCharacter->GetPlayerScore()));
-        //std::string PlayerTwoText("P2 Score: " + std::to_string(PlayerTwoCharacter->GetPlayerScore()));
-        std::string PlayerOneText("P1 Score: " );
-        std::string PlayerTwoText("P2 Score: " );
+        std::string PlayerOneText("P1 Score: " + std::to_string(PlayerOneCharacter->GetPlayerScore()));
+        std::string PlayerTwoText("P2 Score: " + std::to_string(PlayerTwoCharacter->GetPlayerScore()));
+        //std::string PlayerOneText("P1 Score: " );
+        //std::string PlayerTwoText("P2 Score: " );
 
         float RemainingTime = Cast<ABubblepopGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->GetRemainingTime();
         int minutes = RemainingTime / 60;
