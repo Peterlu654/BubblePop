@@ -241,6 +241,8 @@ void ABubblepopCharacter::PopBubble()
     
     if (TombstoneMesh){
         PlayerMesh->SetSkeletalMesh(TombstoneMesh);
+        SetActorScale3D(FVector(0.1, 0.1, 0.1));
+        DisableInput( Cast<APlayerController>( GetController() ) );
     }
   
     FTimerHandle spawnTimer;
@@ -255,6 +257,8 @@ void ABubblepopCharacter::RespawnNoob()
     
     if (CharacterMesh){
         PlayerMesh->SetSkeletalMesh(CharacterMesh);
+        SetActorScale3D(FVector(1.0, 1.0, 1.0));
+        EnableInput(Cast<APlayerController>( GetController() ) );
     }
     
     SetActorLocation(pos);
