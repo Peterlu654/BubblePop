@@ -23,10 +23,12 @@ ABubblepopCharacter::ABubblepopCharacter()
     bUseControllerRotationYaw = false;
     bUseControllerRotationRoll = false;
     
+    
+    
     // Configure character movement
     GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...
     GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f); // ...at this rotation rate
-    GetCharacterMovement()->JumpZVelocity = 650.f;
+    GetCharacterMovement()->JumpZVelocity = 650.0f;
     GetCharacterMovement()->AirControl = 0.2f;
     
     // Create a camera boom (pulls in towards the player if there is a collision)
@@ -258,6 +260,8 @@ void ABubblepopCharacter::RespawnNoob()
     if (CharacterMesh){
         PlayerMesh->SetSkeletalMesh(CharacterMesh);
         SetActorScale3D(FVector(1.0, 1.0, 1.0));
+        GetCharacterMovement()->MaxWalkSpeed *= 5;
+        GetCharacterMovement()->JumpZVelocity = 650.0f;
         EnableInput(Cast<APlayerController>( GetController() ) );
     }
     
@@ -283,10 +287,18 @@ float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEv
                     // Need to set rotation like this because otherwise gun points down
                     FRotator Rotation(0.0f, 0.0f, 0.0f);
                     
+                    
+                    
                     MyBubble = World->SpawnActor<APlayerBubble>(BubbleClass, FVector::ZeroVector, Rotation, SpawnParams);
                     if (MyBubble != nullptr) {
                         MyBubble->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
 						InBubble = true;
+                        GetCharacterMovement()->MaxWalkSpeed /= 5;
+                        
+                        FVector temp = FVector(GetActorLocation().X, GetActorLocation().Y , 150);
+                        GetCharacterMovement()->JumpZVelocity = 0.0f;
+                        GetCharacterMovement()->AirControl = 0.0f;
+                        SetActorLocation(temp);
                     }
                 }
             }
