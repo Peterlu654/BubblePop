@@ -238,7 +238,7 @@ void ABubblepopCharacter::PopBubble()
 	MyBubble->Destroy();
 	MyBubble = nullptr;
 	BubblePopped = true;
-    
+	InBubble = false;
     if (TombstoneMesh){
         PlayerMesh->SetSkeletalMesh(TombstoneMesh);
         SetActorScale3D(FVector(0.1, 0.1, 0.1));
@@ -287,6 +287,8 @@ float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEv
                     if (MyBubble != nullptr) {
                         MyBubble->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
 						InBubble = true;
+						FTimerHandle spawnTimer;
+						GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::ClearBubbleAfterTimeOut, BubbleTimeout, false);
                     }
                 }
             }
@@ -294,4 +296,15 @@ float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEv
     }
     
     return ActualDamage;
+}
+
+void ABubblepopCharacter::ClearBubbleAfterTimeOut() {
+	if (!InBubble || MyBubble == nullptr) return;
+	
+	MyBubble->DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
+	MyBubble->Destroy();
+	MyBubble = nullptr;
+	InBubble = false;
+	CharacterHealth = 100.0f;
+	
 }
