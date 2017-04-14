@@ -42,7 +42,10 @@ void APlayerBubble::OnHitBubble(AActor* SelfActor, AActor* OtherActor, FVector N
 	if (castedP == nullptr) 
 		return;
 
-
+	if (p == c) {
+		//When Bubble is created
+		return;
+	}
 	castedP->PopBubble();
 	c->AddScoreAfterPopping();
 }
