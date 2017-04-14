@@ -16,7 +16,7 @@ AWeapon::AWeapon()
     
     FireRate = 0.1f;
     WeaponRange = 10000.0f;
-    WeaponDamage = 2.0f;
+    WeaponDamage = 10.0f;
     
 }
 

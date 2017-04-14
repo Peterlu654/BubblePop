@@ -261,7 +261,7 @@ void ABubblepopCharacter::RespawnNoob()
         PlayerMesh->SetSkeletalMesh(CharacterMesh);
         SetActorScale3D(FVector(1.0, 1.0, 1.0));
         GetCharacterMovement()->MaxWalkSpeed *= 5;
-        GetCharacterMovement()->JumpZVelocity = 650.0f;
+
         EnableInput(Cast<APlayerController>( GetController() ) );
     }
     
@@ -296,11 +296,6 @@ float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEv
 
                         GetCharacterMovement()->MaxWalkSpeed /= 5;
                         
-                        FVector temp = FVector(GetActorLocation().X, GetActorLocation().Y , 150);
-                        GetCharacterMovement()->JumpZVelocity = 0.0f;
-                        GetCharacterMovement()->AirControl = 0.0f;
-                        SetActorLocation(temp);
-
 						FTimerHandle spawnTimer;
 						GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::ClearBubbleAfterTimeOut, BubbleTimeout, false);
 
@@ -321,5 +316,5 @@ void ABubblepopCharacter::ClearBubbleAfterTimeOut() {
 	MyBubble = nullptr;
 	InBubble = false;
 	CharacterHealth = 100.0f;
-	
+	GetCharacterMovement()->MaxWalkSpeed *= 5;
 }
