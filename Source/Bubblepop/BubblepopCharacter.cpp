@@ -223,6 +223,11 @@ void ABubblepopCharacter::BeginPlay() {
     }
 }
 
+void ABubblepopCharacter::AddScoreAfterPopping()
+{
+	CharacterScore += PopScore;
+}
+
 
 void ABubblepopCharacter::PopBubble()
 {
@@ -237,9 +242,7 @@ void ABubblepopCharacter::PopBubble()
     if (TombstoneMesh){
         PlayerMesh->SetSkeletalMesh(TombstoneMesh);
     }
-    
-    
-    
+  
     FTimerHandle spawnTimer;
     GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::RespawnNoob, 3.0f, false);
 	

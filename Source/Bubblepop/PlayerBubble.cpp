@@ -41,6 +41,9 @@ void APlayerBubble::OnHitBubble(AActor* SelfActor, AActor* OtherActor, FVector N
 	auto castedP = Cast<ABubblepopCharacter>(p);
 	if (castedP == nullptr) 
 		return;
+
+
 	castedP->PopBubble();
+	c->AddScoreAfterPopping();
 }
 

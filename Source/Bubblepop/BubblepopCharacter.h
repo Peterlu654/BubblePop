@@ -41,6 +41,8 @@ public:
     int GetPlayerScore() { return CharacterScore; }
 
 	void PopBubble();
+
+	void AddScoreAfterPopping();
     
     void RespawnNoob();
     
@@ -102,6 +104,8 @@ protected:
     
     void setJump(float value);
     void BeginPlay() override;
+
+	
 	
 protected:
 	// APawn interface
@@ -136,5 +140,6 @@ private:
 	class APlayerBubble* MyBubble;
 	bool InBubble;
 	bool BubblePopped;
+	const int PopScore = 10;
 };
 
