@@ -46,7 +46,22 @@ void APlayerBubble::OnHitBubble(AActor* SelfActor, AActor* OtherActor, FVector N
 		//When Bubble is created
 		return;
 	}
+    PlayBubbleSound(BubblePoppedSound);
+
 	castedP->PopBubble();
+    
 	c->AddScoreAfterPopping();
+}
+
+UAudioComponent* APlayerBubble::PlayBubbleSound(USoundCue* Sound)
+{
+    UAudioComponent* AC = NULL;
+    if (Sound)
+    {
+        //AC = UGameplayStatics::SpawnSoundAttached(Sound, RootComponent);
+        //UGameplayStatics::Sound
+        UGameplayStatics::PlaySound2D(GetWorld(), Sound);
+    }
+    return AC;
 }
 

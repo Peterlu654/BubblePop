@@ -17,13 +17,19 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+    
+    UPROPERTY(EditDefaultsOnly, Category = Sound)
+    class USoundCue* BubblePoppedSound;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 private:
 	UFUNCTION()
 	void OnHitBubble(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
+    
+    // For playing sounds
+    UAudioComponent* PlayBubbleSound(USoundCue*);
 	
 };
