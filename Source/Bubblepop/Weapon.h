@@ -32,7 +32,7 @@ protected:
     
     // Damage for this weapon
     UPROPERTY(EditAnywhere, Category = Damage)
-    float WeaponDamage = 10.0f;
+    float WeaponDamage;
     
     // Hit effect of this weapon
     UPROPERTY(EditDefaultsOnly)
@@ -56,6 +56,14 @@ public:
     
     // Called when want weapon to stop firing
     void OnStopFire();
+
+	/*
+		Effect Functions
+	*/
+	void RestoreDefaultForAll();
+
+	void MultiplyWeaponDamage(float factor);
+	void RestoreDefaultWeaponDamage();
     
 private:
     // Owner of this weapon
@@ -64,7 +72,9 @@ private:
     // Timer used to keep track of fire rate of this weapon
     FTimerHandle WeaponTimer;
     
-    
+	const float DefaultFireRate = 0.1f;
+	const float DefaultWeaponDamage = 10.f;
+	const float DefaultWeaponRange = 10000.0f;
     
 };
 
