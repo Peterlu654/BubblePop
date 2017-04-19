@@ -41,13 +41,17 @@ void ABubblepopGameMode::BeginPlay()
     {
         return;
     }
-    else
+    else if(MyModeNum == 1)
     {
-        ModeNum = 1;
         UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
         GameStarted = true;
         RemainingTime = 60.0f;
         
+    }
+    else
+    {
+        GameStarted = true;
+        RemainingTime = 60.0f;
     }
     
     
@@ -83,7 +87,8 @@ void ABubblepopGameMode::Tick(float DeltaTime)
         //auto PlayerOneCharacter = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
         //PlayerOneCharacter->GetController()->ConsoleCommand("quit");
         //GetWorld()->Exec(GetWorld(), TEXT("exit"));
-        UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit);
+        UGameplayStatics::OpenLevel(GetWorld(), "/Game/ThirdPersonCPP/Maps/MW");
+        //UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit);
 
 
     }
@@ -109,7 +114,14 @@ void ABubblepopGameMode::BeginDestroy()
     {
         return;
     }
+    
+    if (MyModeNum == 1)
+    {
+        ModeNum = 1;
+    }
     GameStarted = false;
+    
+    
     //if (PlayerLoaded == true && GameStarted == true)
     /*{
         PlayerLoaded = false;
