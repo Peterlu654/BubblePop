@@ -14,9 +14,9 @@ AWeapon::AWeapon()
     WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
     RootComponent = WeaponMesh;
     
-    FireRate = 0.1f;
-    WeaponRange = 10000.0f;
-    WeaponDamage = 10.0f;
+    FireRate = DefaultFireRate;
+    WeaponRange = DefaultWeaponRange;
+    WeaponDamage = DefaultWeaponDamage;
     
 }
 
@@ -96,6 +96,17 @@ void AWeapon::WeaponTrace()
         
         
     }
+}
+
+void AWeapon::RestoreDefaultForAll() {
+	RestoreDefaultWeaponDamage();
+}
+
+void AWeapon::MultiplyWeaponDamage(float factor) {
+	WeaponDamage = DefaultWeaponDamage * factor;
+}
+void AWeapon::RestoreDefaultWeaponDamage() {
+	WeaponDamage = DefaultWeaponDamage;
 }
 
 

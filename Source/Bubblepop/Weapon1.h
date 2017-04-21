@@ -12,7 +12,9 @@ UCLASS()
 class BUBBLEPOP_API AWeapon1 : public AWeapon
 {
 	GENERATED_BODY()
-	
+
+protected:
+    virtual void BeginPlay() override;
 	
 	
 	

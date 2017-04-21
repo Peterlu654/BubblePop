@@ -117,10 +117,7 @@ protected:
     
     // Health
     UPROPERTY(EditAnywhere)
-    float CharacterHealth = 100.0f;
-
-	UPROPERTY(EditDefaultsOnly)
-	float CollisionRange = 2.0f;
+    float CharacterHealth;
     
     // Player Score
     int CharacterScore = 0;
@@ -131,18 +128,41 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	/*
+		Effects
+	*/
+	void RestoreDefaultForAll();
+
+	void IncreaseCharacterHealth(int health);
+	void RestoreDefaultCharacterHealth();
+
+	void IncreasePopScore(int score);
+	void RestoreDefaultPopScore();
+
+	void MultiplyWalkSpeed();
+	void RestoreDefaultWalkSpeed();
+
+	void MultiplyDamageResistance();
+	void RestoreDefaultDamageResistance();
+
 
 private:
 	int PlayerId;
 
     class AWeapon* MyWeapon;
-	
+	float DamageResistance;
+
 	class APlayerBubble* MyBubble;
 	bool InBubble;
 	bool BubblePopped;
-	const int PopScore = 10;
+	int PopScore;
 
 	void ClearBubbleAfterTimeOut();
 	float BubbleTimeout = 5.0f;
+
+	const int DefaultCharacterHealth = 100;
+	const int DefaultPopScore = 10;
+	const float DefaultWalkSpeed = 600.0f;
+	const float DefaultDamageResistance = 1.0f;
 };
 

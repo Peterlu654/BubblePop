@@ -48,8 +48,7 @@ ABubblepopCharacter::ABubblepopCharacter()
     
     MyWeapon = nullptr;
     MyBubble = nullptr;
-	InBubble = false;
-	BubblePopped = false;
+	
 	
     PlayerMesh = GetMesh();
     
@@ -198,6 +197,14 @@ void ABubblepopCharacter::BeginPlay() {
     
 	SetActorEnableCollision(true);
     
+	InBubble = false;
+	BubblePopped = false;
+	CharacterHealth = DefaultCharacterHealth;
+	PopScore = DefaultPopScore;
+	DamageResistance = DefaultDamageResistance;
+	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
+
+
     // Spawn the weapon, if one was specified
     if (WeaponClass)
     {
@@ -323,4 +330,36 @@ void ABubblepopCharacter::ClearBubbleAfterTimeOut() {
 	InBubble = false;
 	CharacterHealth = 100.0f;
 	GetCharacterMovement()->MaxWalkSpeed *= 5;
+}
+
+void ABubblepopCharacter::RestoreDefaultForAll() {
+	RestoreDefaultCharacterHealth();
+	RestoreDefaultPopScore();
+	RestoreDefaultWalkSpeed();
+	RestoreDefaultDamageResistance();
+	if (MyWeapon) MyWeapon->RestoreDefaultForAll();
+}
+
+void ABubblepopCharacter::IncreaseCharacterHealth(int health) {
+	CharacterHealth += health;
+	if (CharacterHealth > DefaultCharacterHealth) {
+		CharacterHealth = DefaultCharacterHealth;
+	}
+}
+
+void ABubblepopCharacter::RestoreDefaultCharacterHealth() {
+	CharacterHealth = DefaultCharacterHealth;
+}
+void ABubblepopCharacter::IncreasePopScore(int score)
+{
+	PopScore += score;
+}
+void ABubblepopCharacter::RestoreDefaultPopScore() {
+	PopScore = DefaultPopScore;
+}
+void ABubblepopCharacter::RestoreDefaultWalkSpeed() {
+	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
+}
+void ABubblepopCharacter::RestoreDefaultDamageResistance() {
+	DamageResistance = DefaultDamageResistance;
 }
