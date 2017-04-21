@@ -13,7 +13,8 @@ class BUBBLEPOP_API AWeapon3 : public AWeapon
 {
 	GENERATED_BODY()
 	
-	
+protected:
+    virtual void BeginPlay() override;
 	
 	
 };
