@@ -8,8 +8,9 @@ void AWeapon2::BeginPlay()
     Super::BeginPlay();
     
     //Revolver Stats
-    FireRate = 0.05f;
+    FireRate = 0.2f;
     WeaponRange = 10000.0f;
     WeaponDamage = 20.0f;
-    //WeaponClip = 8.0f;
+    WeaponClip = 8.0f;
+    WeaponReloadTime = 4.0f;
 }

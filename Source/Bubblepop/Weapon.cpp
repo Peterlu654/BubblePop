@@ -17,6 +17,8 @@ AWeapon::AWeapon()
     FireRate = DefaultFireRate;
     WeaponRange = DefaultWeaponRange;
     WeaponDamage = DefaultWeaponDamage;
+    WeaponClip = DefaultWeaponClip;
+    WeaponReloadTime = DefaultReloadTime;
     
 }
 
@@ -40,8 +42,7 @@ void AWeapon::OnStartFire()
     //FireAC = PlayWeaponSound(FireLoopSound);
     //MuzzlePSC = UGameplayStatics::SpawnEmitterAttached(MuzzleFX, WeaponMesh, TEXT("MuzzleFlashSocket"));
     
-    GetWorldTimerManager().SetTimer(WeaponTimer, this, &AWeapon::WeaponTrace,
-                                    FireRate, true);
+    GetWorldTimerManager().SetTimer(WeaponTimer, this, &AWeapon::WeaponTrace, FireRate, true);
 }
 
 // Stop firing weapon if have one

@@ -11,6 +11,7 @@
 
 ABubblepopCharacter::ABubblepopCharacter()
 {
+    
     // Set size for collision capsule
     GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
     
@@ -230,6 +231,11 @@ void ABubblepopCharacter::BeginPlay() {
             }
         }
     }
+    
+    
+    
+    RespawnNoob();
+    GetCharacterMovement()->MaxWalkSpeed /= 5;
 }
 
 void ABubblepopCharacter::AddScoreAfterPopping()
@@ -282,7 +288,7 @@ void ABubblepopCharacter::RespawnNoob()
 float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser){
     float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
     if (ActualDamage > 0.0f){
-        CharacterHealth -= 10;
+        CharacterHealth -= ActualDamage;
         if (CharacterHealth <= 10){
             
             if (BubbleClass && !InBubble) {

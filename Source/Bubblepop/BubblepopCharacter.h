@@ -61,6 +61,15 @@ public:
         FVector(-1750, -250, 150)
     };
     
+    FVector SpawnPoints2[5] =
+    {
+        FVector(-1550, -1150, 150),
+        FVector(750, -1150, 150),
+        FVector(750, 1150, 150),
+        FVector(-1550, 1150, 150),
+        FVector(-400, 0, 150)
+    };
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Assets")
     USkeletalMesh* CharacterMesh;
     
