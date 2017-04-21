@@ -357,6 +357,10 @@ void ABubblepopCharacter::IncreasePopScore(int score)
 void ABubblepopCharacter::RestoreDefaultPopScore() {
 	PopScore = DefaultPopScore;
 }
+void ABubblepopCharacter::MultiplyWalkSpeed(float Factor)
+{
+	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed * Factor;
+}
 void ABubblepopCharacter::RestoreDefaultWalkSpeed() {
 	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
 }

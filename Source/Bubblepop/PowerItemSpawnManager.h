@@ -3,38 +3,36 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "BubblepopCharacter.h"
-#include "PowerItem.generated.h"
+#include "PowerItem.h"
+#include "PowerItemSpawnManager.generated.h"
 
 UCLASS()
-class BUBBLEPOP_API APowerItem : public AActor
+class BUBBLEPOP_API APowerItemSpawnManager : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	APowerItem();
+	APowerItemSpawnManager();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	ABubblepopCharacter* AtttachedCharacter;
-	bool Pickedup;
-
-	UPROPERTY(VisibleDefaultsOnly, Category = PowerUp)
-	USkeletalMesh* PowerItemMesh;
-
-	void DestroyItem();
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-private:
-	
-	const float DisappearTimeout = 15.0f;
+protected:
+	UPROPERTY(EditAnywhere)
+	TArray<class ATargetPoint*> SpawnPoints;
 
-	
+	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<APowerItem>> PowerItemClasses;
+
+	UPROPERTY(EditAnywhere)
+	float SpawnTime;
+
+	void OnSpawnPowerItem();
 	
 };
