@@ -11,6 +11,7 @@
 
 ABubblepopCharacter::ABubblepopCharacter()
 {
+    
     // Set size for collision capsule
     GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
     
@@ -223,6 +224,11 @@ void ABubblepopCharacter::BeginPlay() {
             }
         }
     }
+    
+    
+    
+    RespawnNoob();
+    GetCharacterMovement()->MaxWalkSpeed /= 5;
 }
 
 void ABubblepopCharacter::AddScoreAfterPopping()
