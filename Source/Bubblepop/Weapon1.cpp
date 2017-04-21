@@ -8,9 +8,9 @@ void AWeapon1::BeginPlay()
     Super::BeginPlay();
     
     //Submachine Gun Stats
-    FireRate = 0.2f;
+    FireRate = 0.1f;
     WeaponRange = 10000.0f;
-    WeaponDamage = 5.0f;
+    WeaponDamage = 10.0f;
     //WeaponClip = 50.0f;
 }
 

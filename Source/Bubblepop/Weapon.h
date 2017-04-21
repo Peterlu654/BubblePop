@@ -72,9 +72,9 @@ private:
     // Timer used to keep track of fire rate of this weapon
     FTimerHandle WeaponTimer;
     
-	const float DefaultFireRate = 0.1f;
-	const float DefaultWeaponDamage = 10.f;
-	const float DefaultWeaponRange = 10000.0f;
+    float DefaultFireRate = 0.1f;
+	float DefaultWeaponDamage = 10.0f;
+	float DefaultWeaponRange = 10000.0f;
     
 };
 

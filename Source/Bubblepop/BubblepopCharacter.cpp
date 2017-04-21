@@ -288,7 +288,7 @@ void ABubblepopCharacter::RespawnNoob()
 float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser){
     float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
     if (ActualDamage > 0.0f){
-        CharacterHealth -= 10;
+        CharacterHealth -= ActualDamage;
         if (CharacterHealth <= 10){
             
             if (BubbleClass && !InBubble) {
