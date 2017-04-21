@@ -30,6 +30,14 @@ protected:
     UPROPERTY(EditAnywhere)
     float WeaponRange;
     
+    // Clip size of this weapon
+    UPROPERTY(EditAnywhere)
+    float WeaponClip;
+    
+    // Rload time of this weapon
+    UPROPERTY(EditAnywhere)
+    float WeaponReloadTime;
+    
     // Damage for this weapon
     UPROPERTY(EditAnywhere, Category = Damage)
     float WeaponDamage;
@@ -75,6 +83,8 @@ private:
     float DefaultFireRate = 0.1f;
 	float DefaultWeaponDamage = 10.0f;
 	float DefaultWeaponRange = 10000.0f;
+    float DefaultWeaponClip = 30.0f;
+    float DefaultReloadTime = 3.0f;
     
 };
 
