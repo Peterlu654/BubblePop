@@ -139,7 +139,7 @@ public:
 	void IncreasePopScore(int score);
 	void RestoreDefaultPopScore();
 
-	void MultiplyWalkSpeed();
+	void MultiplyWalkSpeed(float Factor);
 	void RestoreDefaultWalkSpeed();
 
 	void MultiplyDamageResistance();

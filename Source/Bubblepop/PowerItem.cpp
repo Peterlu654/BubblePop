@@ -9,18 +9,19 @@ APowerItem::APowerItem()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	AtttachedCharacter = nullptr;
+	PowerItemMesh = nullptr;
+	Pickedup = false;
 }
 
 // Called when the game starts or when spawned
 void APowerItem::BeginPlay()
 {
 	Super::BeginPlay();
-	/*
-	FScriptDelegate Delegate;
-	Delegate.BindUFunction(this, "EffectDelegate");
-	this->OnActorBeginOverlap.AddUnique(Delegate);
-	*/
+
+	FTimerHandle Timer;
+	GetWorldTimerManager().SetTimer(Timer, this, &APowerItem::DestroyItem, DisappearTimeout, false);
+
 }
 
 // Called every frame
@@ -30,3 +31,8 @@ void APowerItem::Tick(float DeltaTime)
 
 }
 
+void APowerItem::DestroyItem() {
+	if (!Pickedup) {
+		this->Destroy();
+	}
+}
