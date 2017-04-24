@@ -151,8 +151,11 @@ public:
 	void MultiplyWalkSpeed(float Factor);
 	void RestoreDefaultWalkSpeed();
 
-	void MultiplyDamageResistance();
+	void MultiplyDamageResistance(float Factor);
 	void RestoreDefaultDamageResistance();
+
+	void MultiplyWeaponDamage(float Factor);
+	void RestoreDefaultWeaponDamage();
 
 
 private:

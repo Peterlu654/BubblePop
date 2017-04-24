@@ -30,15 +30,19 @@ void APowerItemSpawnManager::Tick(float DeltaTime)
 
 void APowerItemSpawnManager::OnSpawnPowerItem()
 {
-	int num = SpawnPoints.Num();
-	if (num == 0) return;
+	int NumSpawnPoints = SpawnPoints.Num();
+	if (NumSpawnPoints == 0) return;
 
-	int index = FMath::RandRange(0, num - 1);
+	int TargetIndex = FMath::RandRange(0, NumSpawnPoints - 1);
 
-	ATargetPoint* point = SpawnPoints[index];
-	FVector pos = point->GetActorLocation();
-	FRotator rot = point->GetActorRotation();
+	ATargetPoint* point = SpawnPoints[TargetIndex];
+	const FVector pos = point->GetActorLocation();
+	const FRotator rot = point->GetActorRotation();
 
-	//GetWorld()->SpawnActor<ASpeedUpPowerItem>(PowerItemClass, pos, rot);
+	int NumPowerItemClasses = PowerItemClasses.Num();
+	int ClassIndex = FMath::RandRange(0, NumPowerItemClasses-1);
+
+	TSubclassOf<APowerItem> PowerItemClass = PowerItemClasses[ClassIndex];
+	APowerItem* item = GetWorld()->SpawnActor<APowerItem>((UClass*)PowerItemClass, pos, rot);
 }
 

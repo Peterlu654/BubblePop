@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Bubblepop.h"
-#include "SpeedUpPowerItem.h"
+#include "DoubleDamagePowerItem.h"
 
-void ASpeedUpPowerItem::BeginPlay() {
+void ADoubleDamagePowerItem::BeginPlay() {
 	Super::BeginPlay();
 
 	FScriptDelegate Delegate;
@@ -11,24 +11,24 @@ void ASpeedUpPowerItem::BeginPlay() {
 	this->OnActorBeginOverlap.AddUnique(Delegate);
 }
 
-void ASpeedUpPowerItem::OnPickupItem(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit) {
+void ADoubleDamagePowerItem::OnPickupItem(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit) {
 	if (OtherActor == nullptr) {
 		return;
 	}
-		
+
 	auto character = Cast<ABubblepopCharacter>(OtherActor);
 	if (character == nullptr) {
 		return;
 	}
 	AtttachedCharacter = character;
-	AtttachedCharacter->MultiplyWalkSpeed(Factor);
+	AtttachedCharacter->MultiplyWeaponDamage(Factor);
 	Pickedup = true;
 	FTimerHandle Timer;
-	GetWorldTimerManager().SetTimer(Timer, this, &ASpeedUpPowerItem::RestoreCharacterSpeed, Timeout, false);
+	GetWorldTimerManager().SetTimer(Timer, this, &ADoubleDamagePowerItem::RestoreCharacterDamage, Timeout, false);
 	this->SetActorHiddenInGame(true);
 }
 
-void ASpeedUpPowerItem::RestoreCharacterSpeed() {
-	AtttachedCharacter->RestoreDefaultWalkSpeed();
+void ADoubleDamagePowerItem::RestoreCharacterDamage() {
+	AtttachedCharacter->RestoreDefaultWeaponDamage();
 	DestroyItem();
 }

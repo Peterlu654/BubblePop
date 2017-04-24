@@ -364,6 +364,27 @@ void ABubblepopCharacter::MultiplyWalkSpeed(float Factor)
 void ABubblepopCharacter::RestoreDefaultWalkSpeed() {
 	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
 }
+void ABubblepopCharacter::MultiplyDamageResistance(float Factor)
+{
+	DamageResistance = DefaultDamageResistance * Factor;
+}
 void ABubblepopCharacter::RestoreDefaultDamageResistance() {
 	DamageResistance = DefaultDamageResistance;
+}
+
+void ABubblepopCharacter::MultiplyWeaponDamage(float Factor)
+{
+	if (MyWeapon == nullptr) {
+		return;
+	}
+	MyWeapon->MultiplyWeaponDamage(Factor);
+}
+
+void ABubblepopCharacter::RestoreDefaultWeaponDamage()
+{
+	if (MyWeapon == nullptr) {
+		return;
+	}
+
+	MyWeapon->RestoreDefaultWeaponDamage();
 }
