@@ -20,6 +20,8 @@ AWeapon::AWeapon()
     WeaponClip = DefaultWeaponClip;
     WeaponReloadTime = DefaultReloadTime;
     
+    FireAC = nullptr;
+    
 }
 
 // Called when the game starts or when spawned
@@ -36,27 +38,33 @@ void AWeapon::Tick(float DeltaTime)
     
 }
 
+UAudioComponent* AWeapon::PlayWeaponSound(USoundCue* Sound)
+{
+    UAudioComponent* AC = NULL;
+    if (Sound)
+    {
+        AC = UGameplayStatics::SpawnSoundAttached(Sound, RootComponent);
+    }
+    return AC;
+}
+
 // Fire weapon if have one
 void AWeapon::OnStartFire()
 {
-    //FireAC = PlayWeaponSound(FireLoopSound);
-    //MuzzlePSC = UGameplayStatics::SpawnEmitterAttached(MuzzleFX, WeaponMesh, TEXT("MuzzleFlashSocket"));
-    
+    FireAC = PlayWeaponSound(FireLoopSound);
+
     GetWorldTimerManager().SetTimer(WeaponTimer, this, &AWeapon::WeaponTrace, FireRate, true);
 }
+
+
 
 // Stop firing weapon if have one
 void AWeapon::OnStopFire()
 {
-    /*if (FireAC != nullptr)
+    if (FireAC != nullptr)
      {
-     FireAC->Stop();
-     PlayWeaponSound(FireFinishSound);
+         FireAC->Stop();
      }
-     if (MuzzlePSC != nullptr)
-     {
-     MuzzlePSC->DeactivateSystem();
-     }*/
     
     GetWorldTimerManager().ClearTimer(WeaponTimer);
 }
@@ -93,9 +101,6 @@ void AWeapon::WeaponTrace()
         if (target){
             target->TakeDamage(WeaponDamage, FDamageEvent(), GetInstigatorController(), this);
         }
-        
-        
-        
     }
 }
 
@@ -109,5 +114,3 @@ void AWeapon::MultiplyWeaponDamage(float factor) {
 void AWeapon::RestoreDefaultWeaponDamage() {
 	WeaponDamage = DefaultWeaponDamage;
 }
-
-

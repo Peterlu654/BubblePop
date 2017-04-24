@@ -51,7 +51,7 @@ void ABubblepopHUD::DrawHUD()
         Canvas->SetDrawColor(FColor(255, 223, 0));
         Canvas->DrawText(HUDFont, Timer, ViewportSize.X/2 - 32, 5.0f, 2.0f, 2.0f);
         Canvas->SetDrawColor(FColor::Black);
-        Canvas->DrawText(HUDFont, FString("+"), ViewportSize.X/2 - 16, 50.0, 1.0f, 1.0f);
+        Canvas->DrawText(HUDFont, FString("+"), ViewportSize.X/2 - 4, 105.0, 1.0f, 1.0f);
         //Canvas->DrawText(HUDFont, PlayerTwoScore, ViewportSize.X/2 + 200, 5.0f, 2.0f, 2.0f);
         //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X/2 - 150, 80.0f, 2.0f, 2.0f);
         //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X/2 - 150, 100.0f, 2.0f, 2.0f);

@@ -4,12 +4,10 @@
 #include "BubblepopGameMode.h"
 #include "BubblepopCharacter.h"
 #include "BubblepopHUD.h"
+#include <iostream>
 
-static bool PlayerLoaded = false;
 static bool GameStarted = false;
-
 static int ModeNum = 0;
-
 
 ABubblepopGameMode::ABubblepopGameMode()
 {
@@ -29,8 +27,6 @@ ABubblepopGameMode::ABubblepopGameMode()
     MyModeNum = ModeNum;
     ModeNum++;
 
-    
-
 }
 
 void ABubblepopGameMode::BeginPlay()
@@ -41,7 +37,9 @@ void ABubblepopGameMode::BeginPlay()
     {
         return;
     }
-    else if(MyModeNum == 1)
+    
+    // Need to respawn another player
+    else if (GetNumPlayers() == 1)
     {
         UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
         GameStarted = true;
@@ -53,20 +51,6 @@ void ABubblepopGameMode::BeginPlay()
         GameStarted = true;
         RemainingTime = 60.0f;
     }
-    
-    
-    /*if (PlayerLoaded)
-    {
-        RemainingTime = 10;
-        GameStarted = true;
-    }
-    else
-    {
-        UGameplayStatics::CreatePlayer(GetWorld(),-1, true);
-        PlayerLoaded = true;
-
-    }*/
-
     
 }
 
@@ -81,16 +65,8 @@ void ABubblepopGameMode::Tick(float DeltaTime)
     if (RemainingTime <= 0.0f)
     {
         //end game
-        PlayerLoaded = false;
         GameStarted = false;
-//        FGenericPlatformMisc::RequestExit(false);
-        //auto PlayerOneCharacter = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
-        //PlayerOneCharacter->GetController()->ConsoleCommand("quit");
-        //GetWorld()->Exec(GetWorld(), TEXT("exit"));
-        UGameplayStatics::OpenLevel(GetWorld(), "/Game/ThirdPersonCPP/Maps/MW");
-        //UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit);
-
-
+        UGameplayStatics::OpenLevel(GetWorld(), "/Game/ThirdPersonCPP/Maps/MainMenu");
     }
 }
 
@@ -98,13 +74,6 @@ bool ABubblepopGameMode::HasGameStarted()
 {
     return GameStarted;
 }
-
-/*void ABubblepopGameMode::BeginDestroy()
-{
-    PlayerLoaded = false;
-    GameStarted = false;
-    PrimaryActorTick.bCanEverTick = false;
-}*/
 
 void ABubblepopGameMode::BeginDestroy()
 {
@@ -115,25 +84,5 @@ void ABubblepopGameMode::BeginDestroy()
         return;
     }
     
-    if (MyModeNum == 1)
-    {
-        ModeNum = 1;
-    }
     GameStarted = false;
-    
-    
-    //if (PlayerLoaded == true && GameStarted == true)
-    /*{
-        PlayerLoaded = false;
-
-    }
-    GameStarted = false;*/
-    
 }
-
-
-
-
-
-
-
