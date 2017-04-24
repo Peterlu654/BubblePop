@@ -46,6 +46,15 @@ protected:
     UPROPERTY(EditDefaultsOnly)
     UParticleSystem* HitParticle;
     
+    // Sound when Firing
+    UPROPERTY(EditDefaultsOnly, Category = Sound)
+    class USoundCue* FireLoopSound;
+    
+    
+    // Firing audio component
+    UPROPERTY(Transient)
+    class UAudioComponent* FireAC;
+    
 public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
@@ -58,6 +67,10 @@ public:
     
     // Used to determine if this weapon has hit a surface
     void WeaponTrace();
+    
+    // For playing sounds
+    UAudioComponent* PlayWeaponSound(USoundCue* Sound);
+
     
     // Called when weapon starts to fire
     void OnStartFire();
