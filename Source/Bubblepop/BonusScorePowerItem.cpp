@@ -24,6 +24,7 @@ void ABonusScorePowerItem::OnPickupItem(AActor * SelfActor, AActor * OtherActor,
 	AtttachedCharacter = character;
 	AtttachedCharacter->IncreasePopScore(Factor);
 	Pickedup = true;
+    UGameplayStatics::PlaySound2D(GetWorld(), PickedUpSound);
 	FTimerHandle Timer;
 	GetWorldTimerManager().SetTimer(Timer, this, &ABonusScorePowerItem::RestoreBonusScore, Timeout, false);
 	this->SetActorHiddenInGame(true);

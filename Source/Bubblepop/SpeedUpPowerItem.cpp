@@ -23,7 +23,8 @@ void ASpeedUpPowerItem::OnPickupItem(AActor* SelfActor, AActor* OtherActor, FVec
 	AtttachedCharacter = character;
 	AtttachedCharacter->MultiplyWalkSpeed(Factor);
 	Pickedup = true;
-	FTimerHandle Timer;
+    UGameplayStatics::PlaySound2D(GetWorld(), PickedUpSound);
+    FTimerHandle Timer;
 	GetWorldTimerManager().SetTimer(Timer, this, &ASpeedUpPowerItem::RestoreCharacterSpeed, Timeout, false);
 	this->SetActorHiddenInGame(true);
 }

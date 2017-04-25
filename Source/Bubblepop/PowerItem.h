@@ -26,6 +26,11 @@ protected:
 	USkeletalMesh* PowerItemMesh;
 
 	void DestroyItem();
+    
+    
+    UPROPERTY(EditDefaultsOnly, Category = Sound)
+    class USoundCue* PickedUpSound;
+
 
 public:	
 	// Called every frame

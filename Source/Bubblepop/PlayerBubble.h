@@ -20,6 +20,9 @@ protected:
     
     UPROPERTY(EditDefaultsOnly, Category = Sound)
     class USoundCue* BubblePoppedSound;
+    
+    UPROPERTY(EditDefaultsOnly, Category = Sound)
+    class USoundCue* BecomingBubbleSound;
 
 public:
 	// Called every frame

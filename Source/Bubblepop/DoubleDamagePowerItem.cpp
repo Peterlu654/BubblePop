@@ -23,7 +23,8 @@ void ADoubleDamagePowerItem::OnPickupItem(AActor* SelfActor, AActor* OtherActor,
 	AtttachedCharacter = character;
 	AtttachedCharacter->MultiplyWeaponDamage(Factor);
 	Pickedup = true;
-	FTimerHandle Timer;
+    UGameplayStatics::PlaySound2D(GetWorld(), PickedUpSound);
+    FTimerHandle Timer;
 	GetWorldTimerManager().SetTimer(Timer, this, &ADoubleDamagePowerItem::RestoreCharacterDamage, Timeout, false);
 	this->SetActorHiddenInGame(true);
 }
