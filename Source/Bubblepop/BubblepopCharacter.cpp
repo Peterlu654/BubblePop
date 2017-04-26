@@ -210,7 +210,7 @@ void ABubblepopCharacter::BeginPlay() {
 	BuffedDamageResistance = false;
 	GettingBonusScore = false;
 	SpeededUp = false;
-
+    /*
     // Spawn the weapon, if one was specified
     if (WeaponClass)
     {
@@ -223,8 +223,9 @@ void ABubblepopCharacter::BeginPlay() {
             // Need to set rotation like this because otherwise gun points down
             FRotator Rotation(0.0f, 0.0f, 0.0f);
             // Spawn the Weapon
-            MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(0.0f, 1.0f, 0.0f),
-                                                  Rotation, SpawnParams);
+     
+            MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(0.0f, 1.0f, 0.0f), Rotation, SpawnParams);
+            
             if (MyWeapon)
             {
                 // This is attached to "WeaponPoint" which is defined in the skeleton
@@ -237,11 +238,23 @@ void ABubblepopCharacter::BeginPlay() {
             }
         }
     }
-    
+    */
     
     
     RespawnNoob();
     GetCharacterMovement()->MaxWalkSpeed /= 5;
+}
+
+int ABubblepopCharacter::GetWeaponAmmo()
+{
+	if (MyWeapon == nullptr) return -1;
+	return (int)MyWeapon->GetCurrAmmo();
+}
+
+int ABubblepopCharacter::GetWeaponClip()
+{
+	if (MyWeapon == nullptr) return -1;
+	return (int)MyWeapon->GetClip();
 }
 
 void ABubblepopCharacter::AddScoreAfterPopping()
@@ -255,6 +268,7 @@ void ABubblepopCharacter::PopBubble()
 	if (!InBubble || BubblePopped) return;
 	if (MyBubble == nullptr) return;
 
+	CharacterHealth = 0;
 	MyBubble->DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
 	MyBubble->Destroy();
 	MyBubble = nullptr;
@@ -262,7 +276,13 @@ void ABubblepopCharacter::PopBubble()
 	InBubble = false;
     if (TombstoneMesh){
         PlayerMesh->SetSkeletalMesh(TombstoneMesh);
-        SetActorScale3D(FVector(0.1, 0.1, 0.1));
+        if (MyWeapon->WeaponClip == 30.0f ){
+            SetActorScale3D(FVector(0.04, 0.04, 0.04));
+        }
+        else{
+            SetActorScale3D(FVector(0.1, 0.1, 0.1));
+        }
+        
         DisableInput( Cast<APlayerController>( GetController() ) );
     }
   
@@ -288,7 +308,7 @@ void ABubblepopCharacter::RespawnNoob()
     //(UGameplayStatics::GetPlayerCharacter(GetWorld(), 1))->SetActorLocation(pos);
     BubblePopped = false;
     InBubble = false;
-    CharacterHealth = 100;
+    CharacterHealth = DefaultCharacterHealth;
 }
 
 float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser){

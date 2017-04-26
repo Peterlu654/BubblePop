@@ -2,7 +2,7 @@
 
 #include "Bubblepop.h"
 #include "Character3.h"
-
+#include "Weapon.h"
 
 void ACharacter3::BeginPlay() {
     Super::BeginPlay();
@@ -10,32 +10,32 @@ void ACharacter3::BeginPlay() {
     if (CharacterMesh){
         PlayerMesh->SetSkeletalMesh(CharacterMesh);
     }
-    /*
+    
      // Spawn the weapon, if one was specified
      if (WeaponClass)
      {
-     UWorld* World = GetWorld();
-     if (World)
-     {
-     FActorSpawnParameters SpawnParams;
-     SpawnParams.Owner = this;
-     SpawnParams.Instigator = Instigator;
-     // Need to set rotation like this because otherwise gun points down
-     FRotator Rotation(0.0f, 0.0f, 0.0f);
-     // Spawn the Weapon
-     MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(0.0f, 1.0f, 0.0f),
-     Rotation, SpawnParams);
-     if (MyWeapon)
-     {
-     // This is attached to "WeaponPoint" which is defined in the skeleton
-     MyWeapon->AttachToComponent(GetMesh(),
-     FAttachmentTransformRules::KeepRelativeTransform,
-     TEXT("WeaponPoint"));
+         UWorld* World = GetWorld();
+         if (World)
+         {
+             FActorSpawnParameters SpawnParams;
+             SpawnParams.Owner = this;
+             SpawnParams.Instigator = Instigator;
+             // Need to set rotation like this because otherwise gun points down
+             FRotator Rotation(0.0f, 0.0f, 0.0f);
+             // Spawn the Weapon
+             MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(-3.0f, -1.0f, 7.0f),
+             Rotation, SpawnParams);
+             if (MyWeapon)
+             {
+                 // This is attached to "WeaponPoint" which is defined in the skeleton
+                 MyWeapon->AttachToComponent(GetMesh(),
+                 FAttachmentTransformRules::KeepRelativeTransform,
+                 TEXT("WeaponPoint"));
+                 
+                 MyWeapon->SetHolder(this);
+             
+             }
+         }
+     }
      
-     MyWeapon->SetHolder(this);
-     
-     }
-     }
-     }
-     */
 }

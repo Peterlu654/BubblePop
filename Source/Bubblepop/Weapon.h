@@ -19,6 +19,12 @@ public:
     bool isReloading;
     void StartReloading();
     void DoneReloading();
+	float GetClip() { return WeaponClip; }
+	float GetCurrAmmo() { return WeaponCurrentAmmo; }
+    
+    // Clip size of this weapon
+    UPROPERTY(EditAnywhere)
+    float WeaponClip;
     
 protected:
     // Called when the game starts or when spawned
@@ -38,10 +44,7 @@ protected:
     // Weapon Status
     UPROPERTY(EditAnywhere)
     float WeaponCanFire;
-    
-    // Clip size of this weapon
-    UPROPERTY(EditAnywhere)
-    float WeaponClip;
+
     
     // Current ammo of this weapon
     UPROPERTY(EditAnywhere)
@@ -63,6 +66,9 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = Sound)
     class USoundCue* FireLoopSound;
     
+    // Sound when Reloading
+    UPROPERTY(EditDefaultsOnly, Category = Sound)
+    class USoundCue* ReloadSound;
     
     // Firing audio component
     UPROPERTY(Transient)

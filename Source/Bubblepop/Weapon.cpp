@@ -110,7 +110,7 @@ void AWeapon::WeaponTrace()
             // TODO: Actually do something
             UGameplayStatics::SpawnEmitterAtLocation(this, HitParticle, Hit.ImpactPoint);
             
-            ACharacter1* target = Cast<ACharacter1>(Hit.GetActor());
+            ABubblepopCharacter* target = Cast<ABubblepopCharacter>(Hit.GetActor());
             if (target){
                 target->TakeDamage(WeaponDamage, FDamageEvent(), GetInstigatorController(), this);
             }
@@ -129,6 +129,8 @@ void AWeapon::StartReloading()
 {
     if (!isReloading)
     {
+        FireAC->Stop();
+        UGameplayStatics::PlaySound2D(GetWorld(), ReloadSound);
         GetWorldTimerManager().SetTimer(ReloadTimer, this, &AWeapon::DoneReloading, WeaponReloadTime, false);
     }
     isReloading = true;
