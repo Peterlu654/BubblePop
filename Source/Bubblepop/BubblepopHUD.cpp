@@ -58,6 +58,21 @@ void ABubblepopHUD::DrawHUD()
         //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X/2 - 150, 160.0f, 2.0f, 2.0f);
 
 
+		if(Player->GetPlayerBuffedWeaponDamage()) Canvas->SetDrawColor(FColor::Red);
+		else Canvas->SetDrawColor(FColor::Silver);
+		Canvas->DrawText(HUDFont, FString("A"), 10.0f, 30.0f, 3.0f, 3.0f);
+
+		if (Player->GetPlayerBuffedDamageResistance()) Canvas->SetDrawColor(FColor::Green);
+		else Canvas->SetDrawColor(FColor::Silver);
+		Canvas->DrawText(HUDFont, FString("D"), 10.0f, 60.0f, 3.0f, 3.0f);
+
+		if (Player->GetPlayerSpeededUp()) Canvas->SetDrawColor(FColor::Blue);
+		else Canvas->SetDrawColor(FColor::Silver);
+		Canvas->DrawText(HUDFont, FString("S"), 10.0f, 90.0f, 3.0f, 3.0f);
+
+		if (Player->GetPlayerGettingBonusScore()) Canvas->SetDrawColor(FColor::Yellow);
+		else Canvas->SetDrawColor(FColor::Silver);
+		Canvas->DrawText(HUDFont, FString("B"), 10.0f, 120.0f, 3.0f, 3.0f);
 
 
         

@@ -42,6 +42,13 @@ public:
 
 	void PopBubble();
 
+	int GetPlayerHealth() { return CharacterHealth; }
+	bool GetPlayerBuffedWeaponDamage() { return BuffedWeaponDamage; }
+	bool GetPlayerBuffedDamageResistance() { return BuffedDamageResistance; }
+	bool GetPlayerGettingBonusScore() { return GettingBonusScore; }
+	bool GetPlayerSpeededUp() { return SpeededUp; }
+
+
 	void AddScoreAfterPopping();
     
     void RespawnNoob();
@@ -161,20 +168,31 @@ public:
 private:
 	int PlayerId;
 
+	/*Weapon Information*/
     class AWeapon* MyWeapon;
+	bool BuffedWeaponDamage;
 	float DamageResistance;
+	bool BuffedDamageResistance;
+	const float DefaultDamageResistance = 1.0f;
 
+	/*Bubble Information*/
 	class APlayerBubble* MyBubble;
 	bool InBubble;
 	bool BubblePopped;
-	int PopScore;
-
-	void ClearBubbleAfterTimeOut();
 	float BubbleTimeout = 5.0f;
+	void ClearBubbleAfterTimeOut();
 
+	/*Bubble Information*/
+	int PopScore;
+	bool GettingBonusScore;
+	const int DefaultPopScore = 10;	
+
+	/*Health Information*/
 	const int DefaultCharacterHealth = 100;
-	const int DefaultPopScore = 10;
+	
+	/*Speed Information*/
+	bool SpeededUp;
 	const float DefaultWalkSpeed = 600.0f;
-	const float DefaultDamageResistance = 1.0f;
+	
 };
 

@@ -197,6 +197,7 @@ void ABubblepopCharacter::BeginPlay() {
     
 	SetActorEnableCollision(true);
     
+	/*Initialize Player Status*/
 	InBubble = false;
 	BubblePopped = false;
 	CharacterHealth = DefaultCharacterHealth;
@@ -204,6 +205,11 @@ void ABubblepopCharacter::BeginPlay() {
 	DamageResistance = DefaultDamageResistance;
 	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
 
+	/*Initialize HUD Information*/
+	BuffedWeaponDamage = false;
+	BuffedDamageResistance = false;
+	GettingBonusScore = false;
+	SpeededUp = false;
 
     // Spawn the weapon, if one was specified
     if (WeaponClass)
@@ -353,23 +359,29 @@ void ABubblepopCharacter::RestoreDefaultCharacterHealth() {
 void ABubblepopCharacter::IncreasePopScore(int score)
 {
 	PopScore += score;
+	GettingBonusScore = true;
 }
 void ABubblepopCharacter::RestoreDefaultPopScore() {
 	PopScore = DefaultPopScore;
+	GettingBonusScore = false;
 }
 void ABubblepopCharacter::MultiplyWalkSpeed(float Factor)
 {
 	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed * Factor;
+	SpeededUp = true;
 }
 void ABubblepopCharacter::RestoreDefaultWalkSpeed() {
 	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
+	SpeededUp = false;
 }
 void ABubblepopCharacter::MultiplyDamageResistance(float Factor)
 {
 	DamageResistance = DefaultDamageResistance * Factor;
+	BuffedDamageResistance = true;
 }
 void ABubblepopCharacter::RestoreDefaultDamageResistance() {
 	DamageResistance = DefaultDamageResistance;
+	BuffedDamageResistance = false;
 }
 
 void ABubblepopCharacter::MultiplyWeaponDamage(float Factor)
@@ -378,13 +390,16 @@ void ABubblepopCharacter::MultiplyWeaponDamage(float Factor)
 		return;
 	}
 	MyWeapon->MultiplyWeaponDamage(Factor);
+	BuffedWeaponDamage = true;
 }
 
 void ABubblepopCharacter::RestoreDefaultWeaponDamage()
 {
+	BuffedWeaponDamage = false;
 	if (MyWeapon == nullptr) {
 		return;
 	}
 
 	MyWeapon->RestoreDefaultWeaponDamage();
+	
 }

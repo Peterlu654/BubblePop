@@ -25,7 +25,7 @@ private:
 
 	const float Factor = 2.0f;
 
-	const float Timeout = 5.0f;
+	const float Timeout = 20.0f;
 	
 	
 };
