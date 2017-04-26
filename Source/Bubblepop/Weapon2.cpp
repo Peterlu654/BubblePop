@@ -12,7 +12,6 @@ void AWeapon2::BeginPlay()
     WeaponRange = 10000.0f;
     WeaponDamage = 20.0f;
     WeaponClip = 8.0f;
-    WeaponReloadTime = 4.0f;
     WeaponCurrentAmmo = WeaponClip;
     
 }

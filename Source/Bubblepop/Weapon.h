@@ -63,6 +63,9 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = Sound)
     class USoundCue* FireLoopSound;
     
+    // Sound when Reloading
+    UPROPERTY(EditDefaultsOnly, Category = Sound)
+    class USoundCue* ReloadSound;
     
     // Firing audio component
     UPROPERTY(Transient)
