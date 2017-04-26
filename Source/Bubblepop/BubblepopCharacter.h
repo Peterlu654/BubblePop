@@ -43,11 +43,13 @@ public:
 	void PopBubble();
 
 	int GetPlayerHealth() { return CharacterHealth; }
+	int GetPlayerFullHealth() { return DefaultCharacterHealth; }
 	bool GetPlayerBuffedWeaponDamage() { return BuffedWeaponDamage; }
 	bool GetPlayerBuffedDamageResistance() { return BuffedDamageResistance; }
 	bool GetPlayerGettingBonusScore() { return GettingBonusScore; }
 	bool GetPlayerSpeededUp() { return SpeededUp; }
-
+	int GetWeaponAmmo();
+	int GetWeaponClip();
 
 	void AddScoreAfterPopping();
     

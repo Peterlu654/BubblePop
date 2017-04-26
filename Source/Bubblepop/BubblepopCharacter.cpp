@@ -244,6 +244,18 @@ void ABubblepopCharacter::BeginPlay() {
     GetCharacterMovement()->MaxWalkSpeed /= 5;
 }
 
+int ABubblepopCharacter::GetWeaponAmmo()
+{
+	if (MyWeapon == nullptr) return -1;
+	return (int)MyWeapon->GetCurrAmmo();
+}
+
+int ABubblepopCharacter::GetWeaponClip()
+{
+	if (MyWeapon == nullptr) return -1;
+	return (int)MyWeapon->GetClip();
+}
+
 void ABubblepopCharacter::AddScoreAfterPopping()
 {
 	CharacterScore += PopScore;
@@ -255,6 +267,7 @@ void ABubblepopCharacter::PopBubble()
 	if (!InBubble || BubblePopped) return;
 	if (MyBubble == nullptr) return;
 
+	CharacterHealth = 0;
 	MyBubble->DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
 	MyBubble->Destroy();
 	MyBubble = nullptr;
@@ -288,7 +301,7 @@ void ABubblepopCharacter::RespawnNoob()
     //(UGameplayStatics::GetPlayerCharacter(GetWorld(), 1))->SetActorLocation(pos);
     BubblePopped = false;
     InBubble = false;
-    CharacterHealth = 100;
+    CharacterHealth = DefaultCharacterHealth;
 }
 
 float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser){
