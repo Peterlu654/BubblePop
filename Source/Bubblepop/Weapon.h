@@ -20,6 +20,10 @@ public:
     void StartReloading();
     void DoneReloading();
     
+    // Clip size of this weapon
+    UPROPERTY(EditAnywhere)
+    float WeaponClip;
+    
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
@@ -38,10 +42,7 @@ protected:
     // Weapon Status
     UPROPERTY(EditAnywhere)
     float WeaponCanFire;
-    
-    // Clip size of this weapon
-    UPROPERTY(EditAnywhere)
-    float WeaponClip;
+
     
     // Current ammo of this weapon
     UPROPERTY(EditAnywhere)

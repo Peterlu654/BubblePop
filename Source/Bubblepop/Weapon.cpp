@@ -110,7 +110,7 @@ void AWeapon::WeaponTrace()
             // TODO: Actually do something
             UGameplayStatics::SpawnEmitterAtLocation(this, HitParticle, Hit.ImpactPoint);
             
-            ACharacter1* target = Cast<ACharacter1>(Hit.GetActor());
+            ABubblepopCharacter* target = Cast<ABubblepopCharacter>(Hit.GetActor());
             if (target){
                 target->TakeDamage(WeaponDamage, FDamageEvent(), GetInstigatorController(), this);
             }

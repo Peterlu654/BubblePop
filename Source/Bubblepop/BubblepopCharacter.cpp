@@ -262,7 +262,13 @@ void ABubblepopCharacter::PopBubble()
 	InBubble = false;
     if (TombstoneMesh){
         PlayerMesh->SetSkeletalMesh(TombstoneMesh);
-        SetActorScale3D(FVector(0.1, 0.1, 0.1));
+        if (MyWeapon->WeaponClip == 30.0f ){
+            SetActorScale3D(FVector(0.01, 0.01, 0.01));
+        }
+        else{
+            SetActorScale3D(FVector(0.1, 0.1, 0.1));
+        }
+        
         DisableInput( Cast<APlayerController>( GetController() ) );
     }
   
