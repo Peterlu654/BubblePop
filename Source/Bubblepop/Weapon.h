@@ -15,6 +15,11 @@ public:
     // Sets default values for this actor's properties
     AWeapon();
     
+    void CheckWeaponStatus();
+    bool isReloading;
+    void StartReloading();
+    void DoneReloading();
+    
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
@@ -30,9 +35,17 @@ protected:
     UPROPERTY(EditAnywhere)
     float WeaponRange;
     
+    // Weapon Status
+    UPROPERTY(EditAnywhere)
+    float WeaponCanFire;
+    
     // Clip size of this weapon
     UPROPERTY(EditAnywhere)
     float WeaponClip;
+    
+    // Current ammo of this weapon
+    UPROPERTY(EditAnywhere)
+    float WeaponCurrentAmmo;
     
     // Rload time of this weapon
     UPROPERTY(EditAnywhere)
@@ -92,6 +105,7 @@ private:
     
     // Timer used to keep track of fire rate of this weapon
     FTimerHandle WeaponTimer;
+    FTimerHandle ReloadTimer;
     
     float DefaultFireRate = 0.1f;
 	float DefaultWeaponDamage = 10.0f;

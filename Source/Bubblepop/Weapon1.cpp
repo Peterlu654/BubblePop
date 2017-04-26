@@ -13,6 +13,8 @@ void AWeapon1::BeginPlay()
     WeaponDamage = 7.0f;
     WeaponClip = 45.0f;
     WeaponReloadTime = 3.0f;
+    WeaponCurrentAmmo = WeaponClip;
+    
 }
 
 

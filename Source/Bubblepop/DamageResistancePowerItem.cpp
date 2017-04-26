@@ -24,7 +24,8 @@ void ADamageResistancePowerItem::OnPickupItem(AActor* SelfActor, AActor* OtherAc
 	AtttachedCharacter = character;
 	AtttachedCharacter->MultiplyDamageResistance(Factor);
 	Pickedup = true;
-	FTimerHandle Timer;
+    UGameplayStatics::PlaySound2D(GetWorld(), PickedUpSound);
+    FTimerHandle Timer;
 	GetWorldTimerManager().SetTimer(Timer, this, &ADamageResistancePowerItem::RestoreCharacterDamageResistance, Timeout, false);
 	this->SetActorHiddenInGame(true);
 }

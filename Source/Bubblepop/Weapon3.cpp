@@ -8,10 +8,8 @@ void AWeapon3::BeginPlay()
     Super::BeginPlay();
     
     
-    FireRate = 0.05f;
-    WeaponRange = 10000.0f;
-    WeaponDamage = 5.0f;
-    //WeaponClip = 8.0f;
+    //All Defaults
+    
 }
 
 

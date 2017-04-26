@@ -25,7 +25,8 @@ void AHealthPackPowerItem::OnPickupItem(AActor * SelfActor, AActor * OtherActor,
 	AtttachedCharacter = character;
 	AtttachedCharacter->IncreaseCharacterHealth(HealthPoint);
 	Pickedup = true;
-	this->SetActorHiddenInGame(true);
+    UGameplayStatics::PlaySound2D(GetWorld(), PickedUpSound);
+    this->SetActorHiddenInGame(true);
 	DestroyItem();
 }
 
