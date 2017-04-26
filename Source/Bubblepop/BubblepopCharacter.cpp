@@ -210,7 +210,7 @@ void ABubblepopCharacter::BeginPlay() {
 	BuffedDamageResistance = false;
 	GettingBonusScore = false;
 	SpeededUp = false;
-
+    /*
     // Spawn the weapon, if one was specified
     if (WeaponClass)
     {
@@ -223,8 +223,9 @@ void ABubblepopCharacter::BeginPlay() {
             // Need to set rotation like this because otherwise gun points down
             FRotator Rotation(0.0f, 0.0f, 0.0f);
             // Spawn the Weapon
-            MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(0.0f, 1.0f, 0.0f),
-                                                  Rotation, SpawnParams);
+     
+            MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(0.0f, 1.0f, 0.0f), Rotation, SpawnParams);
+            
             if (MyWeapon)
             {
                 // This is attached to "WeaponPoint" which is defined in the skeleton
@@ -237,7 +238,7 @@ void ABubblepopCharacter::BeginPlay() {
             }
         }
     }
-    
+    */
     
     
     RespawnNoob();
@@ -276,7 +277,7 @@ void ABubblepopCharacter::PopBubble()
     if (TombstoneMesh){
         PlayerMesh->SetSkeletalMesh(TombstoneMesh);
         if (MyWeapon->WeaponClip == 30.0f ){
-            SetActorScale3D(FVector(0.01, 0.01, 0.01));
+            SetActorScale3D(FVector(0.04, 0.04, 0.04));
         }
         else{
             SetActorScale3D(FVector(0.1, 0.1, 0.1));
