@@ -60,22 +60,28 @@ void ABubblepopHUD::DrawHUD()
 
 		if(Player->GetPlayerBuffedWeaponDamage()) Canvas->SetDrawColor(FColor::Red);
 		else Canvas->SetDrawColor(FColor::Silver);
-		Canvas->DrawText(HUDFont, FString("A"), 10.0f, 30.0f, 3.0f, 3.0f);
+		Canvas->DrawText(HUDFont, FString("A"), 10.0f, 180.0f, 3.0f, 3.0f);
 
 		if (Player->GetPlayerBuffedDamageResistance()) Canvas->SetDrawColor(FColor::Green);
 		else Canvas->SetDrawColor(FColor::Silver);
-		Canvas->DrawText(HUDFont, FString("D"), 10.0f, 60.0f, 3.0f, 3.0f);
+		Canvas->DrawText(HUDFont, FString("D"), 10.0f, 210.0f, 3.0f, 3.0f);
 
 		if (Player->GetPlayerSpeededUp()) Canvas->SetDrawColor(FColor::Blue);
 		else Canvas->SetDrawColor(FColor::Silver);
-		Canvas->DrawText(HUDFont, FString("S"), 10.0f, 90.0f, 3.0f, 3.0f);
+		Canvas->DrawText(HUDFont, FString("S"), 10.0f, 240.0f, 3.0f, 3.0f);
 
 		if (Player->GetPlayerGettingBonusScore()) Canvas->SetDrawColor(FColor::Yellow);
 		else Canvas->SetDrawColor(FColor::Silver);
-		Canvas->DrawText(HUDFont, FString("B"), 10.0f, 120.0f, 3.0f, 3.0f);
+		Canvas->DrawText(HUDFont, FString("B"), 10.0f, 270.0f, 3.0f, 3.0f);
 
-
+		Canvas->SetDrawColor(FColor::Silver);
+		std::string healthString = "Health:" + std::to_string(Player->GetPlayerHealth()) 
+			+ "/" + std::to_string(Player->GetPlayerFullHealth());
+		Canvas->DrawText(HUDFont, FString(healthString.c_str()), 10.0f, 300.0f, 3.0f, 3.0f);
         
+		std::string ammoString = "Ammo:" + std::to_string(Player->GetWeaponAmmo())
+			+ "/" + std::to_string(Player->GetWeaponClip());
+		Canvas->DrawText(HUDFont, FString(ammoString.c_str()), ViewportSize.X - 300.0f, 300.0f, 3.0f, 3.0f);
         //Canvas->DrawText(HUDFont,HUDString1, ViewportSize.X,10.0f, 2.0f, 2.0f);
         //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X, ViewportSize.Y / 2 + 10, 5.0f, 5.0f);
         

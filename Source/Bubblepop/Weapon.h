@@ -19,6 +19,8 @@ public:
     bool isReloading;
     void StartReloading();
     void DoneReloading();
+	float GetClip() { return WeaponClip; }
+	float GetCurrAmmo() { return WeaponCurrentAmmo; }
     
     // Clip size of this weapon
     UPROPERTY(EditAnywhere)
@@ -64,6 +66,9 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = Sound)
     class USoundCue* FireLoopSound;
     
+    // Sound when Reloading
+    UPROPERTY(EditDefaultsOnly, Category = Sound)
+    class USoundCue* ReloadSound;
     
     // Firing audio component
     UPROPERTY(Transient)
