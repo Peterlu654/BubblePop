@@ -19,6 +19,8 @@ public:
     bool isReloading;
     void StartReloading();
     void DoneReloading();
+	float GetClip() { return WeaponClip; }
+	float GetCurrAmmo() { return WeaponCurrentAmmo; }
     
 protected:
     // Called when the game starts or when spawned
