@@ -18,7 +18,7 @@ APowerItem::APowerItem()
 void APowerItem::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	FTimerHandle Timer;
 	GetWorldTimerManager().SetTimer(Timer, this, &APowerItem::DestroyItem, DisappearTimeout, false);
 
@@ -28,7 +28,10 @@ void APowerItem::BeginPlay()
 void APowerItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
+	FRotator rot = this->GetActorRotation();
+	rot.Add(0.0f, DeltaTime * 90.0f, 0.0f);
+	this->SetActorRotation(rot);
 }
 
 void APowerItem::DestroyItem() {
