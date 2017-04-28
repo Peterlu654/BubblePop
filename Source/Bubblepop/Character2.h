@@ -14,7 +14,7 @@ class BUBBLEPOP_API ACharacter2 : public ABubblepopCharacter
 	GENERATED_BODY()
 	
 private:
-    class AWeapon* MyWeapon;
+    //class AWeapon* MyWeapon;
     void BeginPlay() override;
     class APlayerBubble* MyBubble;
 	

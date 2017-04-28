@@ -15,15 +15,15 @@ class BUBBLEPOP_API UBubblepopGameInstance : public UGameInstance
 	
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FString FirstGameClass;
+    FString FirstGameClass = "Rifle";
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FString SecondGameClass;
+    FString SecondGameClass = "Rifle";
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FString GameMap;
+    FString GameMap = "Jungle";
     
-    
+    UBubblepopGameInstance();
     
     
 	

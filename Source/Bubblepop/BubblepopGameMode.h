@@ -17,6 +17,9 @@ public:
     
     static bool HasGameStarted();
     
+    UClass* GetDefaultPawnClassForController_Implementation(AController* InController) override;
+
+    
 private:
     void BeginPlay() override;
     void BeginDestroy() override;

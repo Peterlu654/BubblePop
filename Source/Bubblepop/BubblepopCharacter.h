@@ -167,7 +167,7 @@ public:
 	void RestoreDefaultWeaponDamage();
 
 
-private:
+protected:
 	int PlayerId;
 
 	/*Weapon Information*/

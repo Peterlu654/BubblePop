@@ -5,6 +5,7 @@
 #include "BubblepopCharacter.h"
 #include "BubblepopGameMode.h"
 #include <string>
+#include <iostream>
 #include "math.h"
 
 
@@ -13,6 +14,7 @@ void ABubblepopHUD::DrawHUD()
     if (Canvas != NULL && ABubblepopGameMode::HasGameStarted())
     {
         int32 id = ((APlayerController*)GetOwningPlayerController())->GetLocalPlayer()->GetControllerId();
+        std::cout << id << std::endl;
         ABubblepopCharacter* Player;
         if (id == 0)
         {

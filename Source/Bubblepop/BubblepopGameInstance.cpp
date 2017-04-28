@@ -3,6 +3,9 @@
 #include "Bubblepop.h"
 #include "BubblepopGameInstance.h"
 
-
+UBubblepopGameInstance::UBubblepopGameInstance()
+{
+    
+}
 
 

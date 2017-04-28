@@ -172,6 +172,11 @@ void ABubblepopCharacter::MoveRight(float Value)
 // Fire weapon if have one
 void ABubblepopCharacter::OnStartFire()
 {
+    if(MyWeapon == nullptr)
+    {
+        printf("Ah!");
+    }
+    
     if (MyWeapon != nullptr)
     {
         MyWeapon->OnStartFire();
@@ -242,7 +247,7 @@ void ABubblepopCharacter::BeginPlay() {
     
     
     RespawnNoob();
-    GetCharacterMovement()->MaxWalkSpeed /= 5;
+    //GetCharacterMovement()->MaxWalkSpeed /= 5;
 }
 
 int ABubblepopCharacter::GetWeaponAmmo()
