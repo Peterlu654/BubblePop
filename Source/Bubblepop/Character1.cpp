@@ -2,7 +2,7 @@
 
 #include "Bubblepop.h"
 #include "Character1.h"
-#include "Weapon1.h"
+#include "Weapon.h"
 
 
 void ACharacter1::BeginPlay() {
@@ -11,7 +11,7 @@ void ACharacter1::BeginPlay() {
     if (CharacterMesh){
         PlayerMesh->SetSkeletalMesh(CharacterMesh);
     }
-    /*
+    
     // Spawn the weapon, if one was specified
     if (WeaponClass)
     {
@@ -38,5 +38,5 @@ void ACharacter1::BeginPlay() {
             }
         }
     }
-     */
+     
 }

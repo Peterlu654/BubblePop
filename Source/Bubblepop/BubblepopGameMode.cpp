@@ -8,6 +8,8 @@
 
 static bool GameStarted = false;
 static int ModeNum = 0;
+static int PlayerOneScore = 0;
+static int PlayerTwoScore = 0;
 
 ABubblepopGameMode::ABubblepopGameMode()
 {
@@ -66,6 +68,11 @@ void ABubblepopGameMode::Tick(float DeltaTime)
     {
         //end game
         GameStarted = false;
+        auto PlayerOne = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
+        auto PlayerTwo = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),1));
+
+        PlayerOneScore = PlayerOne->GetPlayerScore();
+        PlayerTwoScore = PlayerTwo->GetPlayerScore();
         UGameplayStatics::OpenLevel(GetWorld(), "/Game/ThirdPersonCPP/Maps/MainMenu");
     }
 }
