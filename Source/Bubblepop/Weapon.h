@@ -96,7 +96,10 @@ public:
     
     // Called when want weapon to stop firing
     void OnStopFire();
-
+    
+    // Check to see if weapno is full
+    bool IsFull() const { return WeaponCurrentAmmo == WeaponClip; }
+    
 	/*
 		Effect Functions
 	*/

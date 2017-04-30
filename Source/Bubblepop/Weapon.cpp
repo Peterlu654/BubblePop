@@ -129,8 +129,12 @@ void AWeapon::StartReloading()
 {
     if (!isReloading)
     {
-        FireAC->Stop();
+        if (FireAC != nullptr)
+        {
+            FireAC->Stop();
+        }
         UGameplayStatics::PlaySound2D(GetWorld(), ReloadSound);
+        WeaponCanFire = false;
         GetWorldTimerManager().SetTimer(ReloadTimer, this, &AWeapon::DoneReloading, WeaponReloadTime, false);
     }
     isReloading = true;

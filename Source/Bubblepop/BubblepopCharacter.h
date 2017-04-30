@@ -34,6 +34,9 @@ public:
     
     // Stop firing weapon if have one
     void OnStopFire();
+    
+    // Reload weapon if have one
+    void OnStartReload();
 
     float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
     

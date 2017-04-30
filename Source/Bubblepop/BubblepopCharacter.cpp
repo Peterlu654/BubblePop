@@ -86,6 +86,8 @@ void ABubblepopCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
         
         PlayerInputComponent->BindAction("Fire1", IE_Pressed, this, &ABubblepopCharacter::OnStartFire);
         PlayerInputComponent->BindAction("Fire1", IE_Released, this, &ABubblepopCharacter::OnStopFire);
+        
+        PlayerInputComponent->BindAction("Reload1", IE_Pressed, this, &ABubblepopCharacter::OnStartReload);
     }
     else if(id == 1)
     {
@@ -109,6 +111,9 @@ void ABubblepopCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
         
         PlayerInputComponent->BindAction("Fire2", IE_Pressed, this, &ABubblepopCharacter::OnStartFire);
         PlayerInputComponent->BindAction("Fire2", IE_Released, this, &ABubblepopCharacter::OnStopFire);
+        
+        PlayerInputComponent->BindAction("Reload2", IE_Pressed, this, &ABubblepopCharacter::OnStartReload);
+
     }
 }
 
@@ -189,6 +194,15 @@ void ABubblepopCharacter::OnStopFire()
     if (MyWeapon != nullptr)
     {
         MyWeapon->OnStopFire();
+    }
+}
+
+// Start reloading weapon, if have one
+void ABubblepopCharacter::OnStartReload()
+{
+    if (MyWeapon != nullptr && !MyWeapon->IsFull())
+    {
+        MyWeapon->StartReloading();
     }
 }
 
