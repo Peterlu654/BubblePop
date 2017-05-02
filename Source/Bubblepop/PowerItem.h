@@ -22,14 +22,14 @@ protected:
 	ABubblepopCharacter* AtttachedCharacter;
 	bool Pickedup;
 
-	UPROPERTY(VisibleDefaultsOnly, Category = PowerUp)
-	USkeletalMesh* PowerItemMesh;
-
 	void DestroyItem();
     
     
     UPROPERTY(EditDefaultsOnly, Category = Sound)
     class USoundCue* PickedUpSound;
+
+	UPROPERTY(EditDefaultsOnly)
+	float DisappearTimeout;
 
 
 public:	
@@ -38,7 +38,7 @@ public:
 
 private:
 	
-	const float DisappearTimeout = 15.0f;
+	//const float DisappearTimeout = 15.0f;
 
 	
 	

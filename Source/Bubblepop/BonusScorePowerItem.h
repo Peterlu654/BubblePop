@@ -17,14 +17,20 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly)
+		float Timeout;
+
+	UPROPERTY(EditDefaultsOnly)
+		float Factor;
+
 private:
 	UFUNCTION()
 	void OnPickupItem(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
 
 	void RestoreBonusScore();
 
-	const int Factor = 10;
+	//const int Factor = 10;
 
-	const float Timeout = 20.0f;
+	//const float Timeout = 20.0f;
 	
 };

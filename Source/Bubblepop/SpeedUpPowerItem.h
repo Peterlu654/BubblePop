@@ -18,7 +18,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	//UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly)
+	float Timeout;
+
+	UPROPERTY(EditDefaultsOnly)
+	float Factor;
 
 
 private:
@@ -27,8 +31,8 @@ private:
 	
 	void RestoreCharacterSpeed();
 
-	const float Factor = 2.0f;
+	//const float Factor = 2.0f;
 
-	const float Timeout = 20.0f;
+	//const float Timeout = 20.0f;
 
 };

@@ -17,13 +17,19 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly)
+		float Timeout;
+
+	UPROPERTY(EditDefaultsOnly)
+		float Factor;
+
 private:
 	UFUNCTION()
 	void OnPickupItem(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
 
 	void RestoreCharacterDamageResistance();
 
-	const float Factor = 2.0f;
+	//const float Factor = 2.0f;
 
-	const float Timeout = 20.0f;
+	//const float Timeout = 20.0f;
 };

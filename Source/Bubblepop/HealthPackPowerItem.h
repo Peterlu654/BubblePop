@@ -17,11 +17,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly, Category = Effect)
+	int HealthPoint;
+
+
 private:
 	UFUNCTION()
 	void OnPickupItem(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
 
-	const int HealthPoint = 50;
+	//const int HealthPoint = 50;
 
 	
 };
