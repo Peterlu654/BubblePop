@@ -442,3 +442,15 @@ void ABubblepopCharacter::RestoreDefaultWeaponDamage()
 	MyWeapon->RestoreDefaultWeaponDamage();
 	
 }
+
+bool ABubblepopCharacter::IsReloading()
+{
+    if (MyWeapon != nullptr)
+    {
+        return MyWeapon->GetIsReloading();
+    }
+    else
+    {
+        return false;
+    }
+}

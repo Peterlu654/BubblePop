@@ -100,6 +100,8 @@ public:
     // Check to see if weapno is full
     bool IsFull() const { return WeaponCurrentAmmo == WeaponClip; }
     
+    bool GetIsReloading() const { return isReloading; }
+    
 	/*
 		Effect Functions
 	*/

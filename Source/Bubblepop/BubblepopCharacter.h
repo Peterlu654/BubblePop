@@ -53,6 +53,7 @@ public:
 	bool GetPlayerSpeededUp() { return SpeededUp; }
 	int GetWeaponAmmo();
 	int GetWeaponClip();
+    bool IsReloading();
 
 	void AddScoreAfterPopping();
     
