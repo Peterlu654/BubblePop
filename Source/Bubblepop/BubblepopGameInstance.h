@@ -21,7 +21,7 @@ public:
     FString SecondGameClass = "Rifle";
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FString GameMap = "Jungle";
+    FString GameMap = "Castle";
     
     UBubblepopGameInstance();
     
