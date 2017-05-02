@@ -16,8 +16,8 @@ ABubblepopCharacter::ABubblepopCharacter()
     GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
     
     // set our turn rates for input
-    BaseTurnRate = 10000.f;
-    BaseLookUpRate = 10000.f;
+    BaseTurnRate = 1000.f;
+    BaseLookUpRate = 1000.f;
     
     // Don't rotate when the controller rotates. Let that just affect the camera.
     bUseControllerRotationPitch = false;
