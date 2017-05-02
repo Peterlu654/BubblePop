@@ -318,7 +318,7 @@ void ABubblepopCharacter::RespawnNoob()
     if (CharacterMesh){
         PlayerMesh->SetSkeletalMesh(CharacterMesh);
         SetActorScale3D(FVector(1.0, 1.0, 1.0));
-        GetCharacterMovement()->MaxWalkSpeed *= 5;
+        GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
 
         EnableInput(Cast<APlayerController>( GetController() ) );
     }
@@ -374,7 +374,7 @@ void ABubblepopCharacter::ClearBubbleAfterTimeOut() {
 	MyBubble = nullptr;
 	InBubble = false;
 	CharacterHealth = 100.0f;
-	GetCharacterMovement()->MaxWalkSpeed *= 5;
+	GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
 }
 
 void ABubblepopCharacter::RestoreDefaultForAll() {
