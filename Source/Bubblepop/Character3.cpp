@@ -23,7 +23,7 @@ void ACharacter3::BeginPlay() {
              // Need to set rotation like this because otherwise gun points down
              FRotator Rotation(0.0f, 0.0f, 0.0f);
              // Spawn the Weapon
-             MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(-3.0f, -1.0f, 7.0f),
+             MyWeapon = World->SpawnActor<AWeapon>(WeaponClass, FVector(-4.0f, -1.0f, 7.0f),
              Rotation, SpawnParams);
              if (MyWeapon)
              {
