@@ -81,9 +81,20 @@ void ABubblepopHUD::DrawHUD()
 			+ "/" + std::to_string(Player->GetPlayerFullHealth());
 		Canvas->DrawText(HUDFont, FString(healthString.c_str()), 10.0f, 300.0f, 3.0f, 3.0f);
         
-		std::string ammoString = "Ammo:" + std::to_string(Player->GetWeaponAmmo())
-			+ "/" + std::to_string(Player->GetWeaponClip());
-		Canvas->DrawText(HUDFont, FString(ammoString.c_str()), ViewportSize.X - 300.0f, 300.0f, 3.0f, 3.0f);
+        if (Player->IsReloading())
+        {
+            Canvas->SetDrawColor(FColor::Red);
+            std::string reloadingString = "Reloading...";
+            Canvas->DrawText(HUDFont, FString(reloadingString.c_str()), ViewportSize.X - 270.0f, 300.0f, 3.0f, 3.0f);
+            Canvas->SetDrawColor(FColor::Silver);
+        }
+        else
+        {
+        
+            std::string ammoString = "Ammo:" + std::to_string(Player->GetWeaponAmmo())
+                + "/" + std::to_string(Player->GetWeaponClip());
+            Canvas->DrawText(HUDFont, FString(ammoString.c_str()), ViewportSize.X - 300.0f, 300.0f, 3.0f, 3.0f);
+        }
         //Canvas->DrawText(HUDFont,HUDString1, ViewportSize.X,10.0f, 2.0f, 2.0f);
         //Canvas->DrawText(HUDFont, HUDString2, ViewportSize.X, ViewportSize.Y / 2 + 10, 5.0f, 5.0f);
         
