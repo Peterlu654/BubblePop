@@ -90,6 +90,9 @@ public:
     // For playing sounds
     UAudioComponent* PlayWeaponSound(USoundCue* Sound);
 
+    void SetFull(){
+        WeaponCurrentAmmo = WeaponClip;
+    }
     
     // Called when weapon starts to fire
     void OnStartFire();
@@ -118,10 +121,10 @@ private:
     FTimerHandle WeaponTimer;
     FTimerHandle ReloadTimer;
     
-    float DefaultFireRate = 0.1f;
+    float DefaultFireRate = 0.05f;
 	float DefaultWeaponDamage = 10.0f;
 	float DefaultWeaponRange = 10000.0f;
-    float DefaultWeaponClip = 30.0f;
+    float DefaultWeaponClip = 50.0f;
     float DefaultReloadTime = 3.0f;
     
 };

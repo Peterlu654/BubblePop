@@ -79,8 +79,8 @@ UClass* ABubblepopGameMode::GetDefaultPawnClassForController_Implementation(ACon
     auto firstPlayer = UGameplayStatics::GetPlayerController(GetWorld(), 0);
     
     //int32 id = ((APlayerController*)InController)->GetLocalPlayer()->GetControllerId();
-    
-    
+    //enable input again
+    EnableInput((APlayerController*)InController);
     
     if (firstPlayer == InController)
     {
@@ -233,8 +233,10 @@ void ABubblepopGameMode::BeginPlay()
         UGameplayStatics::CreatePlayer(GetWorld(), -1, true);
     }*/
     
+    
+    
     GameStarted = true;
-    RemainingTime = 120.0f;
+    RemainingTime = 90.0f;
     /*// Need to respawn another player
     else if (GetNumPlayers() == 1)
     {
@@ -261,11 +263,17 @@ void ABubblepopGameMode::Tick(float DeltaTime)
     RemainingTime -= DeltaTime;
     if (RemainingTime <= 0.0f)
     {
+        
+        
         //end game
         GameStarted = false;
         auto PlayerOne = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
         auto PlayerTwo = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),1));
 
+        GetWorldTimerManager().ClearTimer(PlayerOne->spawnTimer);
+        GetWorldTimerManager().ClearTimer(PlayerTwo->spawnTimer);
+        
+        
         PlayerOneScore = PlayerOne->GetPlayerScore();
         PlayerTwoScore = PlayerTwo->GetPlayerScore();
         GameEnded = true;
@@ -274,18 +282,26 @@ void ABubblepopGameMode::Tick(float DeltaTime)
         {
             PlayerOne->Result = EndGameResult::Win;
             PlayerTwo->Result = EndGameResult::Lose;
+            PlayerTwo->TurnDead();
+            PlayerOne->TurnUp();
         }
         else if (PlayerOneScore < PlayerTwoScore)
         {
             PlayerOne->Result = EndGameResult::Lose;
             PlayerTwo->Result = EndGameResult::Win;
+            PlayerOne->TurnDead();
+            PlayerTwo->TurnUp();
         }
         else
         {
             PlayerOne->Result = EndGameResult::Tie;
             PlayerTwo->Result = EndGameResult::Tie;
+            PlayerOne->TurnDead();
+            PlayerTwo->TurnDead();
         }
         
+        
+        GameStarted = false;
         FTimerHandle Timer;
         GetWorldTimerManager().SetTimer(Timer, this, &ABubblepopGameMode::EndGame, 5.0f, false);
         
@@ -316,7 +332,7 @@ void ABubblepopGameMode::BeginDestroy()
 
 void ABubblepopGameMode::EndGame()
 {
-    GameEnded = true;
+    GameEnded = false;
     
     UGameplayStatics::OpenLevel(GetWorld(), "/Game/ThirdPersonCPP/Maps/MainMenu");
 }

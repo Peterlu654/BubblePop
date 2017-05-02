@@ -109,7 +109,7 @@ void ABubblepopHUD::DrawHUD()
         //Draw
         //Canvas->DrawItem(NewText);
     }
-    else if (Canvas != NULL && ABubblepopGameMode::HasGameStarted())
+    else if (Canvas != NULL && ABubblepopGameMode::GameHasEnded() )
     {
         int32 id = ((APlayerController*)GetOwningPlayerController())->GetLocalPlayer()->GetControllerId();
         ABubblepopCharacter* Player;

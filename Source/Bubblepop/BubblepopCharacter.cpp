@@ -16,8 +16,8 @@ ABubblepopCharacter::ABubblepopCharacter()
     GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
     
     // set our turn rates for input
-    BaseTurnRate = 500.f;
-    BaseLookUpRate = 500.f;
+    BaseTurnRate = 10000.f;
+    BaseLookUpRate = 10000.f;
     
     // Don't rotate when the controller rotates. Let that just affect the camera.
     bUseControllerRotationPitch = false;
@@ -182,7 +182,7 @@ void ABubblepopCharacter::OnStartFire()
         printf("Ah!");
     }
     
-    if (MyWeapon != nullptr)
+    if (MyWeapon != nullptr && !InBubble)
     {
         MyWeapon->OnStartFire();
     }
@@ -213,7 +213,7 @@ void ABubblepopCharacter::setJump(float value){
 void ABubblepopCharacter::BeginPlay() {
     // Call base class BeginPlay
     Super::BeginPlay();
-    
+    EnableInput(Cast<APlayerController>( GetController() ) );
 	SetActorEnableCollision(true);
     
 	/*Initialize Player Status*/
@@ -281,6 +281,24 @@ void ABubblepopCharacter::AddScoreAfterPopping()
 	CharacterScore += PopScore;
 }
 
+void ABubblepopCharacter::TurnDead(){
+    if (TombstoneMesh){
+        PlayerMesh->SetSkeletalMesh(TombstoneMesh);
+        if (MyWeapon->WeaponClip == 30.0f ){
+            SetActorScale3D(FVector(0.04, 0.04, 0.04));
+        }
+        else{
+            SetActorScale3D(FVector(0.1, 0.1, 0.1));
+        }
+        
+        DisableInput( Cast<APlayerController>( GetController() ) );
+    }
+}
+
+void ABubblepopCharacter::TurnUp(){
+    DisableInput(Cast<APlayerController>( GetController() ));
+}
+
 
 void ABubblepopCharacter::PopBubble()
 {
@@ -305,7 +323,7 @@ void ABubblepopCharacter::PopBubble()
         DisableInput( Cast<APlayerController>( GetController() ) );
     }
   
-    FTimerHandle spawnTimer;
+    
     GetWorldTimerManager().SetTimer(spawnTimer, this, &ABubblepopCharacter::RespawnNoob, 5.0f, false);
 	
 }
@@ -319,7 +337,10 @@ void ABubblepopCharacter::RespawnNoob()
         PlayerMesh->SetSkeletalMesh(CharacterMesh);
         SetActorScale3D(FVector(1.0, 1.0, 1.0));
         GetCharacterMovement()->MaxWalkSpeed = DefaultWalkSpeed;
-
+        if (MyWeapon != nullptr){
+            MyWeapon->SetFull();
+        }
+        
         EnableInput(Cast<APlayerController>( GetController() ) );
     }
     
@@ -351,6 +372,9 @@ float ABubblepopCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEv
                     if (MyBubble != nullptr) {
                         MyBubble->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
 						InBubble = true;
+                        if (MyWeapon != nullptr){
+                            MyWeapon->OnStopFire();
+                        }
 
                         GetCharacterMovement()->MaxWalkSpeed /= 5;
                         

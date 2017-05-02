@@ -52,6 +52,10 @@ public:
     int GetPlayerScore() { return CharacterScore; }
 
 	void PopBubble();
+    void TurnDead();
+    void TurnUp();
+    
+    FTimerHandle spawnTimer;
 
 	int GetPlayerHealth() { return CharacterHealth; }
 	int GetPlayerFullHealth() { return DefaultCharacterHealth; }
@@ -208,7 +212,7 @@ protected:
 	
 	/*Speed Information*/
 	bool SpeededUp;
-	const float DefaultWalkSpeed = 600.0f;
+	const float DefaultWalkSpeed = 400.0f;
 	
 };
 

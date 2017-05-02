@@ -7,11 +7,11 @@ void AWeapon1::BeginPlay()
 {
     Super::BeginPlay();
     
-    //Submachine Gun Stats
+    //Rifle Gun Stats
     FireRate = 0.1f;
     WeaponRange = 10000.0f;
-    WeaponDamage = 7.0f;
-    WeaponClip = 45.0f;
+    WeaponDamage = 15.0f;
+    WeaponClip = 30.0f;
     WeaponCurrentAmmo = WeaponClip;
     
 }
