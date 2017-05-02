@@ -233,7 +233,7 @@ void ABubblepopGameMode::BeginPlay()
     }*/
     
     GameStarted = true;
-    RemainingTime = 60.0f;
+    RemainingTime = 120.0f;
     /*// Need to respawn another player
     else if (GetNumPlayers() == 1)
     {
