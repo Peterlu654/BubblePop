@@ -14,6 +14,7 @@
 #include <iostream>
 
 static bool GameStarted = false;
+static bool GameEnded = false;
 static int ModeNum = 0;
 static int PlayerOneScore = 0;
 static int PlayerTwoScore = 0;
@@ -253,7 +254,7 @@ void ABubblepopGameMode::BeginPlay()
 void ABubblepopGameMode::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    if (!GameStarted)
+    if (!GameStarted || GameEnded)
     {
         return;
     }
@@ -267,13 +268,38 @@ void ABubblepopGameMode::Tick(float DeltaTime)
 
         PlayerOneScore = PlayerOne->GetPlayerScore();
         PlayerTwoScore = PlayerTwo->GetPlayerScore();
-        UGameplayStatics::OpenLevel(GetWorld(), "/Game/ThirdPersonCPP/Maps/MainMenu");
+        GameEnded = true;
+        
+        if (PlayerOneScore > PlayerTwoScore)
+        {
+            PlayerOne->Result = EndGameResult::Win;
+            PlayerTwo->Result = EndGameResult::Lose;
+        }
+        else if (PlayerOneScore < PlayerTwoScore)
+        {
+            PlayerOne->Result = EndGameResult::Lose;
+            PlayerTwo->Result = EndGameResult::Win;
+        }
+        else
+        {
+            PlayerOne->Result = EndGameResult::Tie;
+            PlayerTwo->Result = EndGameResult::Tie;
+        }
+        
+        FTimerHandle Timer;
+        GetWorldTimerManager().SetTimer(Timer, this, &ABubblepopGameMode::EndGame, 5.0f, false);
+        
     }
 }
 
 bool ABubblepopGameMode::HasGameStarted()
 {
     return GameStarted;
+}
+
+bool ABubblepopGameMode::GameHasEnded()
+{
+    return GameEnded;
 }
 
 void ABubblepopGameMode::BeginDestroy()
@@ -286,4 +312,11 @@ void ABubblepopGameMode::BeginDestroy()
     }
     
     GameStarted = false;
+}
+
+void ABubblepopGameMode::EndGame()
+{
+    GameEnded = true;
+    
+    UGameplayStatics::OpenLevel(GetWorld(), "/Game/ThirdPersonCPP/Maps/MainMenu");
 }

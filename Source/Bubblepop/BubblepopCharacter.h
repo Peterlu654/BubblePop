@@ -4,6 +4,13 @@
 #include "GameFramework/Character.h"
 #include "BubblepopCharacter.generated.h"
 
+enum class EndGameResult
+{
+    Win,
+    Lose,
+    Tie
+};
+
 UCLASS(config=Game)
 class ABubblepopCharacter : public ACharacter
 {
@@ -16,7 +23,8 @@ class ABubblepopCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
-    
+
+
    
 public:
 	ABubblepopCharacter();
@@ -91,6 +99,8 @@ public:
     
     UPROPERTY(VisibleAnywhere, Category = SkeletalMesh)
     class USkeletalMeshComponent* PlayerMesh;
+    
+    EndGameResult Result;
 
 protected:
 
@@ -201,4 +211,6 @@ protected:
 	const float DefaultWalkSpeed = 600.0f;
 	
 };
+
+
 

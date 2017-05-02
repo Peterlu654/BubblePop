@@ -14,7 +14,6 @@ void ABubblepopHUD::DrawHUD()
     if (Canvas != NULL && ABubblepopGameMode::HasGameStarted())
     {
         int32 id = ((APlayerController*)GetOwningPlayerController())->GetLocalPlayer()->GetControllerId();
-        std::cout << id << std::endl;
         ABubblepopCharacter* Player;
         if (id == 0)
         {
@@ -109,6 +108,43 @@ void ABubblepopHUD::DrawHUD()
         
         //Draw
         //Canvas->DrawItem(NewText);
+    }
+    else if (Canvas != NULL && ABubblepopGameMode::HasGameStarted())
+    {
+        int32 id = ((APlayerController*)GetOwningPlayerController())->GetLocalPlayer()->GetControllerId();
+        ABubblepopCharacter* Player;
+        if (id == 0)
+        {
+            Player = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),0));
+            Canvas->SetDrawColor(FColor::Blue);
+            
+        }
+        else
+        {
+            Player = Cast<ABubblepopCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(),1));
+            Canvas->SetDrawColor(FColor::Red);
+            
+        }
+        const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+
+        std::string resultString;
+        if (Player->Result == EndGameResult::Win)
+        {
+            Canvas->SetDrawColor(FColor::Green);
+            resultString = "You Win!";
+        }
+        else if (Player->Result == EndGameResult::Lose)
+        {
+            Canvas->SetDrawColor(FColor::Red);
+            resultString = "You Lose!";
+        }
+        else{
+            Canvas->SetDrawColor(FColor::Yellow);
+            resultString = "You Tie!";
+        }
+        
+        Canvas->DrawText(HUDFont, FString(resultString.c_str()), ViewportSize.X/2 - 100, 140.0f, 3.0f, 3.0f);
+
     }
 }
 

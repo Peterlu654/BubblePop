@@ -17,7 +17,11 @@ public:
     
     static bool HasGameStarted();
     
+    static bool GameHasEnded();
+    
     UClass* GetDefaultPawnClassForController_Implementation(AController* InController) override;
+    
+    void EndGame();
 
     
 private:
